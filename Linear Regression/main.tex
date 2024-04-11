@@ -1,0 +1,104 @@
+\documentclass{article}
+\usepackage[utf8]{inputenc}
+\usepackage[vietnamese]{babel}
+
+\usepackage[english]{babel}
+
+
+\usepackage[letterpaper,top=2cm,bottom=2cm,left=3cm,right=3cm,marginparwidth=1.75cm]{geometry}
+\usepackage{amsmath}
+\usepackage{graphicx}
+\usepackage[colorlinks=true, allcolors=blue]{hyperref}
+
+\title{Linear Regression}
+\author{Lý Quang Thắng}
+
+\begin{document}
+\maketitle
+
+
+\section{Giới thiệu}
+
+Hồi quy tuyến tính (Linear Regression) là một thuật toán hồi quy mà đầu ra là một hàm tuyến tính của đầu vào. Đây là thuật toán đơn giản nhất trong các thuật toán học có giám sát (supervised learning)
+
+\subsection{Ví dụ}
+Xét bài toán ước lượng giá trị của một căn nhà rộng $x_1\ m^2$, có $x_2$ phòng ngủ và cách trung tâm thành phố $x_3\ m$ . Giả sử ta có 1 tập dữ liệu có $10000$ căn nhà trong thành phố. Thì ta có dự đoán được giá $y$ của căn nhà rộng $\Acute{x_1}\ m^2$ , có $\Acute{x_2}$ phòng ngủ và cách trung tâm thành phố $\Acute{x_3}\ m$ không? Ở đây, vector đặc trưng $X = [x_1, x_2, x_3]^T$ là một vector cột chứa dữ liệu đầu vào, đầu ra $y$ là một số thực dương.
+Phương trình của $y$ là:
+\begin{equation}
+    y \approx \hat{y} = f(x) = w_1x_1 + w_2x_2 + w_3x_3 = X^TW \tag{1}
+\end{equation}
+trong đó $W = [w_1, w_2, w_3]^T$ là vector trọng số (weight vector) cần tìm. Mối quan hệ $y \approx f(x)$ là mối quan hệ tuyến tính.
+Bài toán ở trên là bài toán dự đoán giá trị đầu ra dựa trên vector đặc trưng (feature vector) đầu vào. Vì vậy đây là một bài toán hồi quy. Mối quan hệ $\hat{y} = X^TW$ là mối quan hệ tuyến tính (linear relationship).
+\section{Xây dựng và tối ưu hàm mất mát}
+Hàm dự đoán với vector đặc trưng $d$ chiều $X \in \mathbb{R}^d$ được viết dưới dạng:
+\begin{equation}
+    y = w_1x_1 + w_2x_2 + ... + w_dx_d = X^TW \tag{2}
+\end{equation}
+\subsection{Sai số dự đoán}
+Sau khi xây dựng mô hình dự đoán như $(2)$ thì ta cần tìm một phép đánh giá phù hợp với bài toán. Với bài toán hồi quy nói chung ta mong muốn sự sai khác $e$ giữa đầu ra thực sự $y$ và đầu ra dự đoán $\hat{y}$ là nhỏ nhất:
+\begin{equation}
+    \frac{1}{2} e^2 = \frac{1}{2} (y - \hat{y})^2 = \frac{1}{2} (y - X^TW)^2 \tag{3}
+\end{equation}
+Ở đây, bình phương được lấy vì sai số $e = y - \hat{y}$ có thể âm. Chúng ta có thể mô tả sai số bằng trị tuyệt đối $|e| = |y - \hat{y}|$. Tuy nhiên, cách này ít được sử dụng vì hàm trị tuyệt đối không khả vi tại gốc tọa độ, không thuận tiện cho việc tối ưu. Hệ số $\frac{1}{2}$ sẽ bị triệt tiêu khi lấy đạo hàm của $e$ theo tham số mô hình $W.
+
+\subsection{Hàm mất mát (Lost function or cost function)}
+Việc tìm mô hình tốt nhất tương đương với việc tìm $W$ để tham số sau đạt giá trị nhỏ nhất:
+\begin{equation}
+    L(W) = \frac{1}{2N} \sum_{i = 1}^N(y_i-{X_i}^TW)^2 \tag{4}
+\end{equation}
+Hàm $L(W)$ chính là hàm mất mát của mô hình hồi quy tuyến tính. Ta mong muốn sự mất mát là nhỏ nhất, điều này có thể đạt được bằng cách tổi thiểu hàm mất mát theo $W$:
+\begin{equation}
+    W^* = argminL(W) \tag(5)
+\end{equation}
+$W^*$ là nghiệm cần tim của bài toán.
+
+\subsection{Lưu ý: Trung bình sai số}
+
+Hàm mất mát thường là trung bình cộng của các sai số tại mỗi điểm. Về mặt toán học hệ số $\frac{1}{2N}$ không ảnh hưởng tới nghiệm của bài toán. Nhưng việc lấy trung bình này quan trọng vì số lượng điểm dữ liệu trong tập huấn luyện có thể thay đổi.. Việc lấy trung bình cũng giúp tránh hiện tượng tràn số khi số lượng điểm dữ liệu lớn. 
+
+Trước khi xây dựng nghiệm cho bài toán, ta thấy rằng hàm số này được viết gọn lại dưới dạng ma trận, vector và norm như sau:
+\begin{equation}
+    L(W) = \frac{1}{2N} \left\| y - X^TW \right\|_2^2 \tag{6}
+\end{equation}
+với $y = [y_1, y_2,..., y_n]^T$, $X=[x_1, x_2,..., x_n]$.
+\section{Nghiệm của hồi quy tuyến tính}
+
+Nhận thấy hàm mất mát có gradient tại mọi $W$. Ta giải phương trình đạo hàm của $L(W)$ theo $W$ bằng không:
+\begin{equation}
+    \frac{\nabla L(W)}{\nabla W} = \frac{1}{2N}X(X^TW - y) \tag{7}
+\end{equation}
+Cho gradient bằng không:
+\begin{equation}
+    \frac{\nabla L(W)}{\nabla W} = 0 \Leftrightarrow   XX^TW = Xy \tag{8}
+\end{equation}
+Nếu ma trận vuông $XX^T$ khả nghịch thì phương trình có nghiệm duy nhất $W = (XX^T)^{-1}Xy$ 
+Nhưng nếu không khả nghịch thì phương trình vô nghiệm hoặc có vô số nghiệm. Ta xác định nghiệm đặc biệt của phương trình dựa vào giả nghịch đảo (pseudo inverse). Cụ thể, $W = (XX^T)^{\dagger}Xy$ trong đó $(XX^T)^{\dagger}$ là giả nghịch đảo của $XX^T$. 
+
+\subsection{Hệ số điều chỉnh}
+Ta thêm vào hàm dự đoán ban đầu một \textit{hệ số điều chỉnh} b:
+\begin{equation}
+    f(x) = X^TW + b \tag{10}
+\end{equation}
+Nếu b = 0 thì đường thẳng/mặt phẳng $y = X^TW + b$ luôn đi qua góc tọa độ. Việc thêm $b$ sẽ khiến mô hình linh hoạt hơn. Hệ số này cũng là một tham số mô hình.
+Ta thêm một đặc trưng $x_0 = 1$, ta có:
+\begin{equation}
+    y = X^TW + b = w_1x_1 + w_2x_2 + ... + w_dx_d + bx_0 = \Bar{X}^T\Bar{W} \tag{11}
+\end{equation}
+\section{Tiếp theo hãy đên ví dụ với PYTHON}
+\section{Thảo luận}
+\subsection{Các bài toán giải được bằng hồi quy tuyến tính}
+Hồi quy tuyến tính áp dụng được cho cả mô hình chỉ cần tuyến tính theo $W$. Ví dụ như:
+
+\begin{equation}
+     y \approx w_1x_1 + w2_x_2 + w3_x_1^2 + w_4sin(x_2) + w_0 \tag{13}
+\end{equation}
+là một hàm tuyến tính theo w nhưng không tuyến tính theo x. Bài toán này vẫn có thể được giải bằng hồi quy tuyến tính. Hồi quy đa thức (polynomial regression) thường được sử dụng nhiều hơn với các vector đặc trưng mới có dạng $[1, x_1, x_1^2,...]^T$ . 
+
+\subsection{Hạn chế}
+Đầu tiên là rất nhạy cảm với dữ liệu nhiễu (sensitive to noise).  Ví dụ nếu dữ liệu trong ví dụ với PYTHON có cặp (150cm, 90kg) thì kết quả sẽ khác đi rất nhiều. Ta có thể tối ưu bằng cách loại bỏ dữ liệu ngoại lai.
+Hạn chế thứ hai là không biểu diễn được các mô hình phức tạp.Hơn nữa việc tìm ra các đặc trưng không tuyến tính theo $X$ không khả thi khi số chiều dữ liệu lớn.
+
+\subsection{Phương pháp tối ưu khác}
+Hồi quy tuyến tính là một mô hình đơn giản, lời giải cho phương trình gradient
+bằng không cũng không phức tạp.Tuy nhiên, nếu ta tínhđược đạo hàm của hàm mất mát, các tham số mô hình có thể được giải bằng một phương pháp hữu dụng có tên gradient descent.
+\end{document}
