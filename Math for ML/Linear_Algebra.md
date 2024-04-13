@@ -1,5 +1,29 @@
 # Đại số tuyến tính cho Machine Learning
 
+<b style="font-size: 170%;">Table of Contents</b>
+
+- [Đại số tuyến tính cho Machine Learning](#đại-số-tuyến-tính-cho-machine-learning)
+  - [1.1. Sơ lược về ký hiệu](#11-sơ-lược-về-ký-hiệu)
+  - [1.2. Chuyển vị và Hermitian](#12-chuyển-vị-và-hermitian)
+  - [1.3. Phép nhân hai ma trận](#13-phép-nhân-hai-ma-trận)
+  - [1.4. Ma trận đơn vị và ma trận nghịch đảo](#14-ma-trận-đơn-vị-và-ma-trận-nghịch-đảo)
+    - [1.4.1 Ma trận đơn vị](#141-ma-trận-đơn-vị)
+    - [1.4.2. Ma trận nghịch đảo](#142-ma-trận-nghịch-đảo)
+  - [1.5. Một vài ma trận đặc biệt](#15-một-vài-ma-trận-đặc-biệt)
+    - [1.5.1. Ma trận đường chéo](#151-ma-trận-đường-chéo)
+    - [1.5.2. Ma trận tam giác](#152-ma-trận-tam-giác)
+  - [1.6. Định thức](#16-định-thức)
+    - [1.6.1 Định nghĩa](#161-định-nghĩa)
+    - [1.6.2. Tính chất](#162-tính-chất)
+  - [1.7. Tổ hợp tuyến tính, không gian sinh](#17-tổ-hợp-tuyến-tính-không-gian-sinh)
+    - [1.7.1. Tổ hợp tuyến tính](#171-tổ-hợp-tuyến-tính)
+    - [1.7.2. Tính chất](#172-tính-chất)
+    - [1.7.3. Cơ sở của một không gian](#173-cơ-sở-của-một-không-gian)
+    - [1.7.4. Range và Null space](#174-range-và-null-space)
+  - [1.8. Hạng của ma trận](#18-hạng-của-ma-trận)
+  - [1.9. Hệ trực chuẩn, ma trận trực giao](#19-hệ-trực-chuẩn-ma-trận-trực-giao)
+
+
 ## 1.1. Sơ lược về ký hiệu
 
 Các đại lượng vô hướng là các chữ thường in nghiêng vd: $x, y, N$. Các ma trận là chữ viết hoa in đậm vd: $\mathbf{X}, \mathbf{Y}$. Các vector được biểu diễn bởi chữ thường in đậm, mặc định là **vector cột** vd: $\mathbf{x}, \mathbf{y}$.
