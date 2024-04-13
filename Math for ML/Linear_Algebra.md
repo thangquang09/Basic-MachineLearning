@@ -128,5 +128,72 @@ Trong đó $\mathbf{A_{ij}}$ là phần bù đại số của $\mathbf{A}$ ứng
 
 $$det(\mathbf{A^{-1}}) = \frac{1}{det(\mathbf{A})} \text{ vì } \det(\mathbf{A})\det(\mathbf{A}^{-1})=\det(\mathbf{A}\mathbf{A}^{-1})=\det(\mathbf{I})=1$$ 
 
-### 1.7 Tổ hợp tuyến tính, không gian sinh
+## 1.7 Tổ hợp tuyến tính, không gian sinh
 
+### 1.7.1. Tổ hợp tuyến tính
+
+Cho các vector khác không $\mathbf{a_1, ..., a_n} \in \mathbb{R}^{m}$ và các số thực $x_1, \dots, x_n \in \mathbb{R}$, vector:
+
+$$\mathbf{b} = x_1a_1 + x_2a_2 + ... + x_na_n$$
+
+được gọi là một *tổ hợp tuyến tính* của $\mathbf{a_1, ..., a_n}$. Xét ma trận $\mathbf{A} = [\mathbf{a_1, a_2, ..., a_n}] \in \mathbb{R^{m \times n}}$. Biểu thức trên sẽ được viết thành $\mathbf{b=Ax}$. Ta nói $\mathbf{b}$ là một tổ hợp tuyến tính các cột của $\mathbf{A}$.
+
+Tập hợp các vector có thể biểu diễn được dưới dạng tổ hợp tuyến tính của một hệ vector được gọi là *không gian sinh* của hệ vector đó. Không gian sinh của một hệ vector được ký hiệu là $span(\mathbf{a_1, ..., a_n})$. Nếu phương trình:
+
+$$0 = x_1\mathbf{a_1} + ... + x_n\mathbf{a_n}$$
+
+có nghiệm duy nhất $x_1 = x_2 = ... = x_n = 0$ thì hệ $\set{\mathbf{a_1, a_2, ..., a_n}}$ *độc lập tuyến tính*. Ngược lại nếu tồn tại $x_1 \neq 0$ sao cho phương trình trên thỏa mãn thì hệ đó *phụ thuộc tuyến tính*.
+
+### 1.7.2. Tính chất
+
+- Một hệ *phụ thuộc tuyến tính* khi và chỉ khi tồn tại một vector trong hệ đó là tổ hợp tuyến tính của các vector còn lại.
+- Tập con khác rỗng của một hệ *độc lập tuyến tính* là một hệ *độc lập tuyến tính*.
+- Các cột của ma trận khả nghịch tạo thành một hệ độc lập tuyến tính.
+
+Giả sử ma trận $\mathbf{A}$ khả nghịch, phương trình $\mathbf{Ax = 0}$ có nghiệm duy nhất $\mathbf{x = A^{-1}0 = 0}$. Vậy $\mathbf{A}$ là hệ độc lập tuyến tính.
+
+- Nếu $\mathbf{A}$ là ma trận cao, nghĩa là số hàng nhiều hơn số cột, $m > n$, tồn tại vector $\mathbf{b}$ sao cho phương trình $\mathbf{Ax=b}$ vô nghiệm.
+- Nếu $n > m$, $n$ vector bất kỳ trong không gian $m$ chiều tạo thành một hệ phụ thuộc tuyến tính.
+
+### 1.7.3. Cơ sở của một không gian
+
+Một hệ các vector $\set{\mathbf{a_1, ..., a_n}}$ trong không gian vector $m$ chiều $V = \mathbb{R}^m$ được gọi là một cơ sở nếu hai điều kiện sau thỏa mãn:
+
+- $V = span(\mathbf{a_1, ..., a_n})$
+- $\set{\mathbf{a_1, a_2, ..., a_n}}$
+
+Khi đó, mọi vector $\mathbf{b} \in V$ đều có thể biểu diễn duy nhất dưới dạng tổ hợp tuyến tính của các $\mathbf{a_i}$. Từ hai tính chất cuối ở mục 1.7.2, ta có thể suy ra rằng $m = n$.
+
+### 1.7.4. Range và Null space
+
+Với mỗi $\mathbf{A} \in \mathbb{R}^{m \times n}$, có hai không gian con quan trọng ứng với ma trận này.
+
+*Range* của $\mathbf{A}$, ký hiệu $\mathcal{R}(\mathbf{A})$, được định nghĩa bởi
+
+$$\mathcal{R}(\mathbf{A}) = \set{\mathbf{y} \in \mathbb{R}^m : \exists \mathbf{x} \in \mathbb{R}^n, \mathbf{Ax=y}}$$
+
+$\mathcal{R}(\mathbf{A})$ là không gian sinh của các cột của $\mathbb{A}$. $\mathcal{R}(\mathbf{A})$ là một không gian con của $\mathbb{R}^n$ với số chiều bằng số lớn nhất của các cột độc lập tuyến tính của $\mathbf{A}$.
+
+*Null* của $\mathbf{A}$, ký hiệu $\mathcal{N}(\mathbf{A})$, được định nghĩa bởi
+
+$$\mathcal{N}(\mathbf{A}) = \set{\mathbf{x} \in \mathbb{R}^n : \mathbf{Ax=0}}$$
+
+Mỗi vector trong $\mathcal{N}(\mathbf{A})$ tương ứng với bộ các hệ số làm cho tổ hợp tuyến tính các cột của $\mathbf{A}$ bằng vector 0. 
+
+Có 
+
+$$dim(\mathcal{R}(\mathbf{A})) + dim(\mathcal{N}(\mathbf{A})) = n$$
+
+## 1.8. Hạng của ma trận
+
+Hạng của ma trận $\mathbf{A} \in \mathbb{R}^{m \times n}$, ký hiệu là $rank(\mathbf{A})$, được định nghĩa là số lượng lớn nhất các cột của nó tạo thành một hệ độc lập tuyến tính. (số cột khác không)
+
+Một số tính chất quan trọng của hạng
+
+- Một ma trận có hạng bằng 0 khi và chỉ khi đó là ma trận không.
+- Hạng của ma trận bằng hạng của ma trận chuyển vị. $rank(\mathbf{A}) = rank(\mathbf{A^T})$.
+- Hạng của ma trận không lớn hơn số hàng hoặc số cột. Nếu $\mathbf{A} \in \mathbb{R}^{n \times m}$ thì $rank(\mathbf{A}) \leq min(m,n)$.
+- Hạng của một tích không vượt quá hạng của một nhân tử. $rank(\mathbf{AB}) \leq min(rank(\mathbf{A}), rank(\mathbf{B}))$.
+- Hạng của tổng không vượt quá tổng các hạng. $rank(\mathbf{A + B}) \leq rank(\mathbf{A}) + rank(\mathbf{B})$.
+
+## 1.9. Hệ trực chuẩn, ma trận trực giao
