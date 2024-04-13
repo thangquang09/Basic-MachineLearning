@@ -128,7 +128,7 @@ Trong đó $\mathbf{A_{ij}}$ là phần bù đại số của $\mathbf{A}$ ứng
 
 $$det(\mathbf{A^{-1}}) = \frac{1}{det(\mathbf{A})} \text{ vì } \det(\mathbf{A})\det(\mathbf{A}^{-1})=\det(\mathbf{A}\mathbf{A}^{-1})=\det(\mathbf{I})=1$$ 
 
-## 1.7 Tổ hợp tuyến tính, không gian sinh
+## 1.7. Tổ hợp tuyến tính, không gian sinh
 
 ### 1.7.1. Tổ hợp tuyến tính
 
