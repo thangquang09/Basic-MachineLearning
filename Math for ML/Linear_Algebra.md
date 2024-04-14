@@ -347,12 +347,11 @@ Phân tích ma trận thành tích của các ma trận đặc biệt mang lại
 
 Giả sử $\mathbf{x_1, ..., x_n \neq 0}$ là các vector riêng của một ma trận vuông $\mathbf{A}$ ứng với các trị riêng lặp hoặc phức $\lambda_1, ..., \lambda_n$.
 
-Đặt $\boldsymbol{\Lambda}=\operatorname{diag}(\lambda_1,\lambda_2,\ldots,\lambda_n)$ và $\mathbf{X=[x_1, x_
-2, ..., x_n]}$, ta sẽ có $\mathbf{AX = X\boldsymbol{\Lambda}}$. Hơn nữa nếu các vector riêng $\mathbf{x_1, ..., x_n}$ độc lập tuyến tính, ma trận $\mathbf{X}$ là một ma trận khả nghịch. Khi đó ta viết $\mathbf{A}$ có dạng:
+Đặt $\boldsymbol{\Lambda}=\operatorname{diag}(\lambda_1,\lambda_2,\ldots,\lambda_n)$ và $\mathbf{X=[x_1, x_2, ..., x_n]}$, ta sẽ có $\mathbf{AX = X\boldsymbol{\Lambda}}$. Hơn nữa nếu các vector riêng $\mathbf{x_1, ..., x_n}$ độc lập tuyến tính, ma trận $\mathbf{X}$ là một ma trận khả nghịch. Khi đó ta viết $\mathbf{A}$ có dạng:
 
 $$\mathbf{A = X\boldsymbol{\Lambda}X^{-1}}$$
 
-Các vector riêng $\mathbf{x_i}$ thường được chọn sao cho $\mathbf{x_i^Tx_i} = 1$. Cách biểu diễn trên được gọi là phép phân tích trị riêng.
+Các vector riêng $\mathbf{x_i}$ thường được chọn sao cho $\mathbf{x_i^Tx_i} =1$. Cách biểu diễn trên được gọi là phép phân tích trị riêng.
 
 Ma trận các trị riêng $\boldsymbol{\Lambda}$ là ma trận đường chéo. Vì vậy cách triển khai này có tên gọi là chéo hóa ma trận. Nếu ma trận $\mathbf{A}$ có thể được phân tích như trên thì ta nói $\mathbf{A}$ chéo hóa được.
 
