@@ -29,6 +29,9 @@
     - [1.11.1. Định nghĩa](#1111-định-nghĩa)
     - [1.11.2. Tính chất](#1112-tính-chất)
   - [1.12. Chéo hóa ma trận](#112-chéo-hóa-ma-trận)
+    - [1.12.1. Lưu ý:](#1121-lưu-ý)
+  - [1.13. Ma trận xác định dương](#113-ma-trận-xác-định-dương)
+  - [1.14. Chuẩn](#114-chuẩn)
 
 
 ## 1.1. Sơ lược về ký hiệu
@@ -281,7 +284,7 @@ $$\mathbf{x}= y_1\mathbf{u_1} + y2\mathbf{u_2} + ... + y_m\mathbf{u_m} = \mathbf
 
 **Hình 1.1.** Chuyển đổi tọa độ trong hệ cơ sở khác nhau. Trong hệ $(O\mathbf{e_1e_2}), \mathbf{x}$ có tọa độ $(x_1,x_2)$. Trong hệ $(O\mathbf{u_1u_2}), \mathbf{x}$ có tọa độ $(y_1,y_2)$.
 
-Với $\mathbf{U = [u_1, ..., u_m]}$. Lúc này vector $\mathbf{y} = [y_1, ..., y_m]^T$ chính là biểu diễn của $\mathbf{x}$ trong hệ cơ sở $\mathbf{U}$. Biểu diễn này là duy nhất.
+Với $\displaystyle\mathbf{U = [u_1, ..., u_m]}$. Lúc này vector $\displaystyle\mathbf{y} = [y_1, ..., y_m]^T$ chính là biểu diễn của $\mathbf{x}$ trong hệ cơ sở $\mathbf{U}$. Biểu diễn này là duy nhất.
 
 Trong các ma trận vuông đóng vai trò như hệ cơ sở, ma trận trực giao được quan tâm nhiều hơn vì nghịch đảo của nó bằng chuyển vị của nó. Khi đó $\mathbf{y = U^Tx}$. Suy ra $y_i = \mathbf{x^Tu_i = u_i^Tx}$. Dưới góc nhìn hình học, hệ trực giao tạo thành hệ Descartes vuông góc.
 
@@ -301,6 +304,32 @@ Từ định nghĩa ta có $(\mathbf{A}-\lambda\mathbf{I})\mathbf{x}=0$, tức $
 
 Cách tìm vector riêng: Thay lần lượt các trị riêng $\lambda$ vào $\mathbf{(A - \lambda I)x=0}$ giải hệ phương trình tìm được $\mathbf{x}$ là vector riêng ứng với trị riêng $\lambda$.
 
+Ví dụ:
+
+Xét ma trận:
+
+$$\mathbf{A} = \left[\begin{matrix}3&5 \\ 0&7\end{matrix}\right]$$
+
+Ta tìm các trị riêng bằng cách giải phương trình:
+
+$$det(\mathbf{A-\lambda I}) = 0$$
+
+Tìm được $\lambda_1 = 3$ và $\lambda_2 = 7$.
+
+Ta tìm các vector riêng ứng với các trị riêng:
+
+Với $\lambda_1 = 3$, giải hệ phương trình:
+
+$$\left[\begin{array}{cc}0&5\\0&4\end{array}\right]\left[\begin{array}{c}x_1\\x_2\end{array}\right]=\left[\begin{array}{c}0\\0\end{array}\right].$$
+
+Ta có nghiệm khác không $\mathbf{x_1} = [1, 0]^T$
+
+Với $\lambda_2 = 7$, giải hệ phương trình:
+
+$$\left[\begin{array}{cc}-4&5\\0&0\end{array}\right]\left[\begin{array}{c}x_3\\x_4\end{array}\right]=\left[\begin{array}{c}0\\0\end{array}\right].$$
+
+Ta có nghiệm khác không $\mathbf{x_2} = [5, 4]^T$
+
 ### 1.11.2. Tính chất
 
 - Nếu $\lambda$ là một trị riêng của $\mathbf{A}$, đặt $E_\lambda (\mathbf{A})$ là tập các vector riêng ứng với trị riêng $\lambda$ đó thì:
@@ -310,7 +339,47 @@ Cách tìm vector riêng: Thay lần lượt các trị riêng $\lambda$ vào $\
 - Tích của tất cả trị riêng của một ma trận bằng định thức của ma trận đó. Tổng tất cả trị riêng của một ma trận bằng tổng các phần tử trên đường chéo chính của ma trận đó.
 - Phổ của ma trận bằng phổ của ma trận chuyển vị của nó.
 - Tất cả trị riêng của ma trận *Hermitian* là các số thực.
-- Nếu $(\lambda, \mathbf{x})$ là một cặp trị riêng, vector riêng của ma trận khả nghịch $\mathbf{A}$ thì $(\frac{1}{\lambda}, \mathbf{x})$ là một cặp trị riêng và vector riêng của $\mathbf{A^{-1}}$.
+- Nếu $(\lambda, \mathbf{x})$ là một cặp trị riêng, vector riêng của ma trận khả nghịch $\mathbf{A}$ thì $\displaystyle(\frac{1}{\lambda}, \mathbf{x})$ là một cặp trị riêng và vector riêng của $\mathbf{A^{-1}}$.
 
 ## 1.12. Chéo hóa ma trận
+
+Phân tích ma trận thành tích của các ma trận đặc biệt mang lại nhiều lợi ích trong việc giải hệ phương trình tuyến tính, tính lũy thừa, xấp xĩ ma trận,... 
+
+Giả sử $\mathbf{x_1, ..., x_n \neq 0}$ là các vector riêng của một ma trận vuông $\mathbf{A}$ ứng với các trị riêng lặp hoặc phức $\lambda_1, ..., \lambda_n$.
+
+Đặt $\boldsymbol{\Lambda}=\operatorname{diag}(\lambda_1,\lambda_2,\ldots,\lambda_n)$ và $\mathbf{X=[x_1, x_
+2, ..., x_n]}$, ta sẽ có $\mathbf{AX = X\boldsymbol{\Lambda}}$. Hơn nữa nếu các vector riêng $\mathbf{x_1, ..., x_n}$ độc lập tuyến tính, ma trận $\mathbf{X}$ là một ma trận khả nghịch. Khi đó ta viết $\mathbf{A}$ có dạng:
+
+$$\mathbf{A = X\boldsymbol{\Lambda}X^{-1}}$$
+
+Các vector riêng $\mathbf{x_i}$ thường được chọn sao cho $\mathbf{x_i^Tx_i} = 1$. Cách biểu diễn trên được gọi là phép phân tích trị riêng.
+
+Ma trận các trị riêng $\boldsymbol{\Lambda}$ là ma trận đường chéo. Vì vậy cách triển khai này có tên gọi là chéo hóa ma trận. Nếu ma trận $\mathbf{A}$ có thể được phân tích như trên thì ta nói $\mathbf{A}$ chéo hóa được.
+
+### 1.12.1. Lưu ý:
+
+- Khái niệm chéo hóa ma trận chỉ áp dụng với ma trận vuông.
+- Không phải ma trận vuông nào cũng chéo hóa được. Một ma trận vuông bậc $n$ chéo hóa được khi và chỉ khi nó có đủ $n$ vector riêng độc lập tuyến tính.
+- Nếu ma trận chéo hóa được, có nhiều hơn một cách chéo hóa ma trận đó. Chỉ cần đổi vị trí của $\lambda_i$ và vị trí tương ứng của cột $\mathbf{x_i}$ của $\mathbf{X}$, ta có cách chéo hóa mới.
+- Nếu $\mathbf{A}$ chéo hóa được thì lũy thừa của nó cũng chéo hóa được. Cụ thể:
+
+$$\mathbf{A}^2=(\mathbf{X}\boldsymbol{\Lambda}\mathbf{X}^{-1})(\mathbf{X}\boldsymbol{\Lambda}\mathbf{X}^{-1})=\mathbf{X}\boldsymbol{\Lambda}^2\mathbf{X}^{-1};\quad\mathbf{A}^k=\mathbf{X}\boldsymbol{\Lambda}^k\mathbf{X}^{-1},\quad\forall k\in\mathbb{N}$$
+
+- Nếu $\mathbf{A}$ khả nghịch, thì $\mathbf{A^{-1} = (X\boldsymbol{\Lambda}X^{-1})^{-1} = X\boldsymbol{\Lambda}^{-1}X^{-1}}$
+
+## 1.13. Ma trận xác định dương
+
+Một ma trận **đối xứng** $\mathbf{A} \in \mathbb{R}^{n \times n}$ được gọi là *xác định dương* nếu:
+
+$$\mathbf{x}^T\mathbf{A}\mathbf{x}>0,\forall\mathbf{x}\in\mathbb{R}^n,\mathbf{x}\neq\mathbf{0}.$$
+
+Một ma trận **đối xứng**  $\mathbf{A} \in \mathbb{R}^{n \times n}$ được gọi là *nửa xác định dương* nếu:
+
+$$\mathbf{x}^T\mathbf{A}\mathbf{x}\geq0,\forall\mathbf{x}\in\mathbb{R}^n,\mathbf{x}\neq\mathbf{0}.$$
+
+Định nghĩa tương tự với *xác định âm* và *nửa xác định âm*.
+
+Ký hiệu $\mathbf{A}\succ0,\succeq0,\prec0,\preceq0$ lân lượt để chỉ một ma trận là xác định dương, nửa xác định dương, xác định âm, và nửa xác định âm. Ký hiệu $\mathcal{A}\succ\mathcal{B}$ cũng được dùng để chỉ ra rằng $\mathrm{A- B\succ 0.}$
+
+## 1.14. Chuẩn
 
