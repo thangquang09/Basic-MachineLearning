@@ -22,6 +22,13 @@
     - [1.7.4. Range và Null space](#174-range-và-null-space)
   - [1.8. Hạng của ma trận](#18-hạng-của-ma-trận)
   - [1.9. Hệ trực chuẩn, ma trận trực giao](#19-hệ-trực-chuẩn-ma-trận-trực-giao)
+    - [1.9.1. Định nghĩa](#191-định-nghĩa)
+    - [1.9.2. Tính chất](#192-tính-chất)
+  - [1.10. Biểu diễn vector trong các hệ cơ sở khác nhau](#110-biểu-diễn-vector-trong-các-hệ-cơ-sở-khác-nhau)
+  - [1.11. Trị riêng và vector riêng](#111-trị-riêng-và-vector-riêng)
+    - [1.11.1. Định nghĩa](#1111-định-nghĩa)
+    - [1.11.2. Tính chất](#1112-tính-chất)
+  - [1.12. Chéo hóa ma trận](#112-chéo-hóa-ma-trận)
 
 
 ## 1.1. Sơ lược về ký hiệu
@@ -196,7 +203,7 @@ Với mỗi $\mathbf{A} \in \mathbb{R}^{m \times n}$, có hai không gian con qu
 
 $$\mathcal{R}(\mathbf{A}) = \set{\mathbf{y} \in \mathbb{R}^m : \exists \mathbf{x} \in \mathbb{R}^n, \mathbf{Ax=y}}$$
 
-$\mathcal{R}(\mathbf{A})$ là không gian sinh của các cột của $\mathbb{A}$. $\mathcal{R}(\mathbf{A})$ là một không gian con của $\mathbb{R}^n$ với số chiều bằng số lớn nhất của các cột độc lập tuyến tính của $\mathbf{A}$.
+$\mathcal{R}(\mathbf{A})$ là không gian sinh của các cột của $\mathbf{A}$. $\mathcal{R}(\mathbf{A})$ là một không gian con của $\mathbb{R}^n$ với số chiều bằng số lớn nhất của các cột độc lập tuyến tính của $\mathbf{A}$.
 
 *Null* của $\mathbf{A}$, ký hiệu $\mathcal{N}(\mathbf{A})$, được định nghĩa bởi
 
@@ -221,3 +228,89 @@ Một số tính chất quan trọng của hạng
 - Hạng của tổng không vượt quá tổng các hạng. $rank(\mathbf{A + B}) \leq rank(\mathbf{A}) + rank(\mathbf{B})$.
 
 ## 1.9. Hệ trực chuẩn, ma trận trực giao
+
+### 1.9.1. Định nghĩa
+
+Một hệ cơ sở $\mathbf{\set{u_1, u_2, ..., u_m}} \in \mathbb{R}^m$ được gọi là *trực giao* nếu mỗi vector khác không và tích vô hướng của hai vector khác nhau bất kỳ bằng không.
+
+$$\mathbf{u_i \neq 0}; \mathbf{u_i^Tu_j = 0} \forall 1 \leq i \neq j \leq m$$
+
+Một hệ cơ sở $\mathbf{\set{u_1, u_2, ..., u_m}} \in \mathbb{R}^m$ được gọi là *trực chuẩn* nếu nó là một hệ *trực giao* và độ dài **Euclid** của mọi vector bằng 1.
+
+$$\mathbf{u}_i^T\mathbf{u}_j=\left\{\begin{array}{l}1\text{ nếu }i=j\\0\text{ nếu }i\neq j\end{array}\right.$$
+
+Nếu $\mathbf{U = [u_1, u_2, ..., u_m]}$ với $\set{u_1, u_2, ..., u_m} \in \mathbb{R}^m$ là *trực chuẩn* thì:
+
+$$\mathbf{UU}^T=\mathbf{U}^T\mathbf{U}=\mathbf{I}$$
+
+Nếu một ma trận thỏa điều kiện trên thì ma trận đó gọi là *ma trận trực giao*. Không có định nghĩa cho ma trận trực chuẩn.
+
+Nếu một ma trận vuông phức $\mathbf{U}$ thỏa $\mathbf{UU^H = U^HU = I}$ thì ma trận $\mathbf{U}$ gọi là ma trận *unitary*. 
+
+### 1.9.2. Tính chất
+
+- Nghịch đảo của ma trận *trực giao* chính là chuyển vị của nó:
+
+$$\mathbf{U^{-1} = U^T}$$
+
+- Nếu $\mathbf{U}$ là một ma trận *trực giao* thì chuyển vị của nó cũng la ma trận trực giao.
+- Định thức của ma trận *trực giao* bằng 1 hoặc -1.
+- Ma trận *trực giao* thể  hiện phép xoay một vector.
+
+Cho hai vector $\mathbf{x, y} \in \mathbb{R}^m$ và một ma trận trực giao $\mathbf{U} \in \mathbb{R}^{m \times m}$. Dùng ma trận này để xoay hai vector trên thì được $\mathbf{Ux, Uy}$. Tích vô hướng mới của hai vector là:
+
+$$(\mathbf{Ux})^T(\mathbf{Uy})=\mathbf{x}^T\mathbf{U}^T\mathbf{Uy}=\mathbf{x}^T\mathbf{y}$$
+
+như vậy phép xoay không làm thay đổi tích vô hướng giữa hai vector.
+
+## 1.10. Biểu diễn vector trong các hệ cơ sở khác nhau
+
+Trong không gian $m$ chiều, tọa độ của mỗi điểm được xác định dựa trên một hệ tọa độ nào đó. Ở các hệ tọa độ khác nhau, tọa độ của mỗi điểm cũng khác nhau.
+
+Tập hợp các vector $\mathbf{e_1, ..., e_m}$ nếu mỗi vector $\mathbf{e_i}$ chỉ có đúng một phần tử khác không ở vị trí $i$ và phần tử đó bằng $1$. Thì hệ này các vector này gọi là *hệ cơ sở đơn vị (hoặc chính tắc)*. Nếu sắp xếp các vector này theo thứ tự cạnh nhau ta được ma trận đơn vị.
+
+Mỗi vector cột $\mathbf{x} = [x_1,x_2,x_3,...,x_m] \in \mathbb{R}^m$ có thể được coi là tổ hợp tuyến tính của các vector trong hệ cơ sở chính tắc:
+
+$$\mathbf{x}=x_1\mathbf{e}_1+x_2\mathbf{e}_2+\cdots+x_m\mathbf{e}_m$$
+
+Giả sử có một hệ cơ sở độc lập tuyến tính khác $\mathbf{u_1, u_2, ..., u_m}$. Trong hệ cơ sở mới này, $\mathbf{x}$ được viết dưới dạng
+
+$$\mathbf{x}= y_1\mathbf{u_1} + y2\mathbf{u_2} + ... + y_m\mathbf{u_m} = \mathbf{Uy}$$
+
+![Hình 1.1](image.png)
+
+**Hình 1.1.** Chuyển đổi tọa độ trong hệ cơ sở khác nhau. Trong hệ $(O\mathbf{e_1e_2}), \mathbf{x}$ có tọa độ $(x_1,x_2)$. Trong hệ $(O\mathbf{u_1u_2}), \mathbf{x}$ có tọa độ $(y_1,y_2)$.
+
+Với $\mathbf{U = [u_1, ..., u_m]}$. Lúc này vector $\mathbf{y} = [y_1, ..., y_m]^T$ chính là biểu diễn của $\mathbf{x}$ trong hệ cơ sở $\mathbf{U}$. Biểu diễn này là duy nhất.
+
+Trong các ma trận vuông đóng vai trò như hệ cơ sở, ma trận trực giao được quan tâm nhiều hơn vì nghịch đảo của nó bằng chuyển vị của nó. Khi đó $\mathbf{y = U^Tx}$. Suy ra $y_i = \mathbf{x^Tu_i = u_i^Tx}$. Dưới góc nhìn hình học, hệ trực giao tạo thành hệ Descartes vuông góc.
+
+Vector không được biểu diễn như nhau trong mọi hệ cơ sở.
+
+## 1.11. Trị riêng và vector riêng
+
+### 1.11.1. Định nghĩa
+
+Cho một ma trận vuông $\mathbf{A} \in \mathbb{R}^{n\times n}$, một vector $\mathbf{x} \in \mathbb{C}^{n} \neq \mathbf{0}$ và một số vô hướng $\lambda \in \mathbb{C}$. Nếu
+
+$$\mathbf{Ax}=\lambda\mathbf{x}$$
+
+Thì $\lambda$ là trị riêng của $\mathbf{A}$ và $\mathbf{x}$ là vector riêng ứng với trị riêng $\lambda$.
+
+Từ định nghĩa ta có $(\mathbf{A}-\lambda\mathbf{I})\mathbf{x}=0$, tức $\mathbf{x}$ nằm trong không gian $\mathcal{N}(\mathbf{A-\lambda I})$. Vì $\mathbf{x \neq 0}$ nên ma trận $\mathbf{A - \lambda I}$ là ma trận không khả nghịch hay $det(\mathbf{A - \lambda I}) = 0$. Vậy giải ra tìm được $\lambda$ là nghiệm của định thức bằng không. Tập hợp tất cả trị riêng được gọi là *phổ* của ma trận $\mathbf{A}$.
+
+Cách tìm vector riêng: Thay lần lượt các trị riêng $\lambda$ vào $\mathbf{(A - \lambda I)x=0}$ giải hệ phương trình tìm được $\mathbf{x}$ là vector riêng ứng với trị riêng $\lambda$.
+
+### 1.11.2. Tính chất
+
+- Nếu $\lambda$ là một trị riêng của $\mathbf{A}$, đặt $E_\lambda (\mathbf{A})$ là tập các vector riêng ứng với trị riêng $\lambda$ đó thì:
+  - Nếu $\mathbf{x} \in E_\lambda (\mathbf{A})$ thì $k\mathbf{x} \in E_\lambda (\mathbf{A}), \forall k \in \mathbb{C}$
+  - Nếu $\mathbf{x_1, x_2} \in E_\lambda (\mathbf{A})$ thì $\mathbf{x_1 + x_2} \in E_\lambda (\mathbf{A})$
+- Mọi ma trận vuông bậc $n$ đều có $n$ trị riêng.
+- Tích của tất cả trị riêng của một ma trận bằng định thức của ma trận đó. Tổng tất cả trị riêng của một ma trận bằng tổng các phần tử trên đường chéo chính của ma trận đó.
+- Phổ của ma trận bằng phổ của ma trận chuyển vị của nó.
+- Tất cả trị riêng của ma trận *Hermitian* là các số thực.
+- Nếu $(\lambda, \mathbf{x})$ là một cặp trị riêng, vector riêng của ma trận khả nghịch $\mathbf{A}$ thì $(\frac{1}{\lambda}, \mathbf{x})$ là một cặp trị riêng và vector riêng của $\mathbf{A^{-1}}$.
+
+## 1.12. Chéo hóa ma trận
+
