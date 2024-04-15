@@ -1,6 +1,6 @@
 # Giải tích ma trận
 
-
+<b style="font-size: 170%;">Table of Contents</b>
 - [Giải tích ma trận](#giải-tích-ma-trận)
   - [2.1. Gradient của hàm trả về một số vô hướng](#21-gradient-của-hàm-trả-về-một-số-vô-hướng)
   - [2.2. Gradient của một hàm trả về vector](#22-gradient-của-một-hàm-trả-về-vector)
