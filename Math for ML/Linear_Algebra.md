@@ -421,9 +421,11 @@ Một vài giá trị $p$ thường hay dùng:
 - Khi $p=1$, ta có chuẩn $||\mathbf{x}||_1 = |x_1| + |x_2| + ... + |x_n|$ là tổng các trị tuyệt đối của từng thành phần của vector.
 - Khi $p \to \infty$, giả sử $i=\arg\max_{j=1,2,...,n}|x_j|$. Khi đó:
 
+
 $$\|\mathbf{x}\|_p=|x_i|\left(1+\left|\frac{x_1}{x_i}\right|^p+\cdots+\left|\frac{x_{i-1}}{x_i}\right|^p+\left|\frac{x_{i+1}}{x_i}\right|^p+\cdots+\left|\frac{x_n}{x_i}\right|^p\right)^{\frac1p}$$
 
 Ta thấy rằng
+
 
 $$\lim_{p\to\infty}\left(1+\left|\frac{x_1}{x_i}\right|^p+\cdots+\left|\frac{x_{i-1}}{x_i}\right|^p+\left|\frac{x_{i+1}}{x_i}\right|^p+\cdots+\left|\frac{x_n}{x_i}\right|^p\right)^{\frac1p}=1$$
 
