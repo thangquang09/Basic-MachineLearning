@@ -5,6 +5,14 @@
   - [2.1. Gradient của hàm trả về một số vô hướng](#21-gradient-của-hàm-trả-về-một-số-vô-hướng)
   - [2.2. Gradient của một hàm trả về vector](#22-gradient-của-một-hàm-trả-về-vector)
   - [2.3. Tính chất quan trọng](#23-tính-chất-quan-trọng)
+    - [2.3.1. Quy tắc tích](#231-quy-tắc-tích)
+    - [2.3.2. Quy tắc chuỗi](#232-quy-tắc-chuỗi)
+  - [2.4. Gradient của các hàm số thường gặp](#24-gradient-của-các-hàm-số-thường-gặp)
+    - [2.4.1. $f(\\mathbf{x}) = \\mathbf{a^Tx}$](#241-fmathbfx--mathbfatx)
+    - [2.4.2. $f(\\mathbf{x}) = \\mathbf{Ax}$](#242-fmathbfx--mathbfax)
+    - [2.4.3. $f(\\mathbf{x}) = \\mathbf{x^TAx}$](#243-fmathbfx--mathbfxtax)
+    - [2.4.4. $f(\\mathbf{x}) = |\\mathbf{Ax - b}|\_2^2$](#244-fmathbfx--mathbfax---b_22)
+    - [2.4.5. $f(\\mathbf{X}) = trace(\\mathbf{AX})$](#245-fmathbfx--tracemathbfax)
 
 
 Giả sử các gradient tồn tại trong chương!
@@ -67,10 +75,90 @@ Trước khi đến phần tính gradient của các hàm số thường gặp, 
 
 ## 2.3. Tính chất quan trọng
 
+### 2.3.1. Quy tắc tích
 
+Giả sử các biến đầu vào là một ma trận và các hàm số có chiều phù hợp để phép nhân ma trận thực hiện được. Ta có:
 
+$$\nabla(f(\mathbf{X})^Tg(\mathbf{X})) = (\nabla f(\mathbf{X}))g(\mathbf{X}) + (\nabla g(\mathbf{X}))f(\mathbf{X})$$
 
+Quy tắc này tương tự như quy tắc tính đạo hàm tích trong 1 chiều với $f,g : \mathbb{R} \to \mathbb{R}$
 
+$$(f(x)g(x))' = f'(x)g(x) + g'(x)f(x)$$
+
+Lưu ý rằng tính chất giao hoán không còn đúng với vector và ma trận, vì vậy:
+
+$$\nabla(f(\mathbf{X})^Tg(\mathbf{X})) \neq g(\mathbf{X})(\nabla f(\mathbf{X})) + f(\mathbf{X})(\nabla g(\mathbf{X}))$$
+
+Biểu thức bên phải có thể không xác định vì chiều của ma trận lệch nhau.
+
+### 2.3.2. Quy tắc chuỗi
+
+Quy tắc chuỗi được áp dụng khi tính gradient của hàm hợp
+
+$$\nabla_\mathbf{X}g(f(\mathbf{X})) = (\nabla_\mathbf{X}f)(\nabla_f g)$$
+
+Quy tắc này cũng giống như trong hàm một biến
+
+$$(g(f(x)))' = f'(x)g'(f)$$
+
+Hãy lưu ý về sự phù hợp của kích thước ma trận khi làm việc với tích các ma trận.
+
+## 2.4. Gradient của các hàm số thường gặp
+
+### 2.4.1. $f(\mathbf{x}) = \mathbf{a^Tx}$
+
+Giả sử $\mathbf{a, x} \in \mathbb{R}^n$, ta viết lại $f(\mathbf{x}) = \mathbf{a^Tx} = a_1x_1 + a_2x_2 + ... +a_nx_n$
+
+Nhận thấy $\frac{\partial f(\mathbf{x})}{\partial x_i} = a_i,\ i = \overline{1,n}$
+
+Vậy $\nabla_\mathbf{x}(\mathbf{a^Tx}) = [a_1, a_2, ..., a_n]^T = \mathbf{a}$
+
+Ngoài ra, vì $\mathbf{a^Tx = x^Ta}$ nên $\nabla_\mathbf{x} (\mathbf{x^Ta}) = \mathbf{a}$
+
+### 2.4.2. $f(\mathbf{x}) = \mathbf{Ax}$
+
+Đây là một hàm trả về vector $f:\mathbb{R}^n \to \mathbb{R}^m$ với $\mathbf{x} \in \mathbb{R^n},\ \mathbf{A} \in \mathbb{R}^{m \times n}$. Giả sử $\mathbf{a_i}$ là hàng thứ $i$ của ma trận $\mathbf{A}$. Ta có
+
+$$\mathbf{Ax} = \left[\begin{matrix}
+  \mathbf{a}_1\mathbf{x} \\ \mathbf{a}_2\mathbf{x} \\ \vdots \\ \mathbf{a}_m\mathbf{x}
+\end{matrix} \right]$$
+
+Vậy từ định nghĩa gradient của ma trận và công thức gradient của $\mathbf{a}_i\mathbf{x}$, suy ra
+
+$$\nabla_\mathbf{x} (\mathbf{Ax}) = [\mathbf{a_1^T, a_2^T, ..., a_m^T}] = \mathbf{A^T}$$
+
+Từ đây suy ra đạo hàm của $f(\mathbf{x}) = \mathbf{x} = \mathbf{Ix}$ là
+
+$$\nabla\mathbf{x} = I$$
+
+### 2.4.3. $f(\mathbf{x}) = \mathbf{x^TAx}$
+
+Với $\mathbf{x} \in \mathbb{R}^n,\ \mathbf{A} \in \mathbb{R}^{n \times n}$, áp dụng quy tắc tích ta có:
+
+$$\begin{align*}
+  \nabla f(\mathbf{x}) &= \nabla((\mathbf{x^T})(\mathbf{Ax})) \\
+                      &= (\nabla(\mathbf{x}))\mathbf{Ax} + (\nabla (\mathbf{Ax}))\mathbf{x}\\
+                      &= \mathbf{IAx} + \mathbf{A^Tx} \\
+                      &= (\mathbf{A + A^T})\mathbf{x}
+\end{align*}$$
+
+Từ đó có thể suy ra $\nabla^2 \mathbf{x^TAx} = (\mathbf{A + A^T})$. Nếu $\mathbf{A}$ là ma trận đối xứng thì ta có $\nabla \mathbf{x^TAx = 2Ax},\ \nabla^2\mathbf{x^TAx} = 2\mathbf{A}$.
+
+### 2.4.4. $f(\mathbf{x}) = \|\mathbf{Ax - b}\|_2^2$
+
+Có hai cách để triển khai gradient của hàm số này:
+
+- Cách 1: Trước hết khai triển:
+
+$$f(\mathbf{x}) = \|\mathbf{Ax - b}\|_2^2 = (\mathbf{Ax - b})^T(\mathbf{Ax - b}) = \mathbf{(x^TA^T - b^T)(Ax - b)} = \mathbf{x^TA^TAx -2b^TAx + b^Tb}$$
+
+Lấy gradient cho từng số hạng rồi ta có:
+
+$$\nabla \|\mathbf{Ax - b}\|_2^2 = \mathbf{2A^TAx - 2A^Tb} = 2\mathbf{A^T(Ax - b)}$$
+
+- Cách 2: Sử dụng $\nabla(\mathbf{Ax - b}) = \mathbf{A^T}$ và $\nabla\mathbf{\|x\|_2^2} = 2\mathbf{x}$ và quy tắc chuỗi ta thu được kết quả tương tự.
+
+### 2.4.5. $f(\mathbf{X}) = trace(\mathbf{AX})$
 
 
 
