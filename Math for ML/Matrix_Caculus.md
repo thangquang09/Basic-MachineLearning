@@ -13,17 +13,17 @@ Giả sử các gradient tồn tại trong chương!
 
 Gradient bậc nhất của một hàm số $f\mathbf{(x)}:\mathbb{R}^n \to \mathbb{R}$ theo $\mathbf{x}$, ký hiệu là $\nabla_\mathbf{x}f(\mathbf{x})$, được định nghĩa bởi:
 
-$$\nabla_\mathbf{x}f(\mathbf{x})\triangleq\begin{bmatrix}\dfrac{\partial f(\mathbf{x})}{\partial x_1}\\\dfrac{\partial f(\mathbf{x})}{\partial x_2}\\\vdots\\\dfrac{\partial f(\mathbf{x})}{\partial x_n}\end{bmatrix}\in\mathbb{R}^n$$
+$$\nabla_\mathbf{x}f(\mathbf{x})\triangleq\begin{bmatrix}\dfrac{\partial f(\mathbf{x})}{\partial x_1}\\ \dfrac{\partial f(\mathbf{x})}{\partial x_2}\\ \vdots\\ \dfrac{\partial f(\mathbf{x})}{\partial x_n}\end{bmatrix}\in\mathbb{R}^n$$
 
 trong đó $\displaystyle\frac{\partial f(\mathbf{x})}{\partial x_i}$ là đạo hàm riêng của hàm số theo thành phần thứ $i$ của $\mathbf{x}$. Đạo hàm này được tính khi tất cả các biến ngoài $\mathbf{x}$ là hằng số. Nếu không có biến nào khác thì $\nabla_\mathbf{x} f(\mathbf{x})$ được viết gọn lại là $\nabla f(\mathbf{x})$. Gradient của hàm số là một vector cùng chiều với vector đang được lấy gradient. Nếu vector đó ở dạng cột thì gradient cũng ở dạng cột.
 
 Gradient bậc hai của hàm số trên còn được gọi là *Hesse* (Hessian) và được định nghĩa như sau:
 
-$$\begin{aligned}\nabla^2f(\mathbf{x})&\triangleq\begin{bmatrix}\frac{\partial^2f(\mathbf{x})}{\partial x_1^2}&\frac{\partial^2f(\mathbf{x})}{\partial x_1\partial x_2}\cdots\frac{\partial^2f(\mathbf{x})}{\partial x_1\partial x_n}\\\frac{\partial^2f(\mathbf{x})}{\partial x_2\partial x_1}&\frac{\partial^2f(\mathbf{x})}{\partial x_2^2}\cdots\frac{\partial^2f(\mathbf{x})}{\partial x_2\partial x_n}\\\vdots&\vdots&\ddots&\vdots\\\frac{\partial^2f(\mathbf{x})}{\partial x_n\partial x_1}&\frac{\partial^2f(\mathbf{x})}{\partial x_n\partial x_2}\cdots\frac{\partial^2f(\mathbf{x})}{\partial x_n^2}\end{bmatrix}\in\mathbb{S}^n.\end{aligned}$$
+$$\begin{aligned}\nabla^2f(\mathbf{x})&\triangleq\begin{bmatrix}\frac{\partial^2f(\mathbf{x})}{\partial x_1^2}&\frac{\partial^2f(\mathbf{x})}{\partial x_1\partial x_2}\cdots\frac{\partial^2f(\mathbf{x})}{\partial x_1\partial x_n}\\ \frac{\partial^2f(\mathbf{x})}{\partial x_2\partial x_1}&\frac{\partial^2f(\mathbf{x})}{\partial x_2^2}\cdots\frac{\partial^2f(\mathbf{x})}{\partial x_2\partial x_n}\\ \vdots&\vdots&\ddots&\vdots\\ \frac{\partial^2f(\mathbf{x})}{\partial x_n\partial x_1}&\frac{\partial^2f(\mathbf{x})}{\partial x_n\partial x_2}\cdots\frac{\partial^2f(\mathbf{x})}{\partial x_n^2}\end{bmatrix}\in\mathbb{S}^n.\end{aligned}$$
 
 Gradient của một hàm số $f(\mathbf{X}): \mathbb{R}^{n \times\ m} \to \mathbb{R}$ theo ma trận $\mathbf{X}$ định nghĩa là:
 
-$$\nabla f(\mathbf{X})=\begin{bmatrix}\dfrac{\partial f(\mathbf{X})}{\partial x_{11}}&\dfrac{\partial f(\mathbf{X})}{\partial x_{12}}&\cdots\dfrac{\partial f(\mathbf{X})}{\partial x_{1m}}\\\dfrac{\partial f(\mathbf{X})}{\partial x_{21}}&\dfrac{\partial f(\mathbf{X})}{\partial x_{22}}&\cdots\dfrac{\partial f(\mathbf{X})}{\partial x_{2m}}\\\vdots&\vdots&\ddots&\vdots\\\dfrac{\partial f(\mathbf{X})}{\partial x_{n1}}&\dfrac{\partial f(\mathbf{X})}{\partial x_{n2}}&\cdots\dfrac{\partial f(\mathbf{X})}{\partial x_{nm}}\end{bmatrix}\in\mathbb{R}^{n\times m}.$$
+$$\nabla f(\mathbf{X})=\begin{bmatrix}\dfrac{\partial f(\mathbf{X})}{\partial x_{11}}&\dfrac{\partial f(\mathbf{X})}{\partial x_{12}}&\cdots\dfrac{\partial f(\mathbf{X})}{\partial x_{1m}}\\ \dfrac{\partial f(\mathbf{X})}{\partial x_{21}}&\dfrac{\partial f(\mathbf{X})}{\partial x_{22}}&\cdots\dfrac{\partial f(\mathbf{X})}{\partial x_{2m}}\\ \vdots&\vdots&\ddots&\vdots\\ \dfrac{\partial f(\mathbf{X})}{\partial x_{n1}}&\dfrac{\partial f(\mathbf{X})}{\partial x_{n2}}&\cdots\dfrac{\partial f(\mathbf{X})}{\partial x_{nm}}\end{bmatrix}\in\mathbb{R}^{n\times m}.$$
 
 >Vậy Gradient của hàm số $f: \mathbb{R}^{n \times m} \to \mathbb{R}$ là một ma trận trong $\mathbb{R}^{n \times m}$
 
