@@ -32,6 +32,10 @@
     - [1.12.1. Lưu ý:](#1121-lưu-ý)
   - [1.13. Ma trận xác định dương](#113-ma-trận-xác-định-dương)
   - [1.14. Chuẩn](#114-chuẩn)
+    - [Định nghĩa 1.1. Chuẩn - Norm](#định-nghĩa-11-chuẩn---norm)
+    - [1.14.1. Một số chuẩn vector thường dùng](#1141-một-số-chuẩn-vector-thường-dùng)
+    - [1.14.2. Chuẩn Frobenius của ma trận](#1142-chuẩn-frobenius-của-ma-trận)
+  - [1.15. Vết](#115-vết)
 
 
 ## 1.1. Sơ lược về ký hiệu
@@ -280,7 +284,7 @@ Giả sử có một hệ cơ sở độc lập tuyến tính khác $\mathbf{u_1
 
 $$\mathbf{x}= y_1\mathbf{u_1} + y2\mathbf{u_2} + ... + y_m\mathbf{u_m} = \mathbf{Uy}$$
 
-![Hình 1.1](image.png)
+![Hình 1.1](1_1.png)
 
 **Hình 1.1.** Chuyển đổi tọa độ trong hệ cơ sở khác nhau. Trong hệ $(O\mathbf{e_1e_2}), \mathbf{x}$ có tọa độ $(x_1,x_2)$. Trong hệ $(O\mathbf{u_1u_2}), \mathbf{x}$ có tọa độ $(y_1,y_2)$.
 
@@ -382,3 +386,72 @@ Ký hiệu $\mathbf{A}\succ0,\succeq0,\prec0,\preceq0$ lân lượt để chỉ 
 
 ## 1.14. Chuẩn
 
+Trong không gian một chiều, khoảng cách giữa hai điểm là trị tuyệt đối của hiệu hai giá trị đó. Trong không gian hai chiều, ta thường dùng khoảng cách Euclid để đo khoảng cách giữa hai điểm. Đôi khi, để đi từ điểm này sang điểm kia, chúng ta không thể đi bằng một đường thẳng và còn phụ thuộc vào hình dạng đường đi nối giữa hai điểm.
+
+Việc đo khoảng cách hai điểm dữ liệu rất cần thiết trong machine learning. Đây là lí do khái niệm *chuẩn* (norm) ra đời. Để xác định khoảng cách giữa hai vector $\mathbf{y}$ và $\mathbf{z}$, người ta áp dụng một hàm số lên vector hiệu $\mathbf{x = y - z}$. Hàm số này có vài tính chất đặc biệt:
+
+### Định nghĩa 1.1. Chuẩn - Norm
+
+Một hàm số $f:\mathbb{R}^n \to \mathbb{R}$ được gọi là một chuẩn nếu nó thỏa mãn ba điều kiện sau:
+- $f(\mathbf{x}) \geq 0$. Dấu bằng xảy ra khi và chỉ khi $\mathbf{x = 0}$.
+- $f(\alpha\mathbf{x}) = |\alpha| f(\mathbf{x}),\ \forall \alpha \in \mathbb{R}$.
+- $f(\mathbf{x_1}) + f(\mathbf{x_2}) \geq f(\mathbf{x_1 + x_2})$.
+
+### 1.14.1. Một số chuẩn vector thường dùng
+
+Độ dài Euclid của một vector $\mathbf{x} \in \mathbb{R}^n$ chính là một chuẩn, chuẩn này gọi là $\ell_{2}$ hay chuẩn Euclid:
+
+$$||\mathbf{x}||_2 = \sqrt{x_1^2 + x_2^2 + ... + x_n^2}$$
+
+Bình phương của chuẩn $\ell_{2}$ chính là tích vô hướng của một vector với chính nó, $||\mathbf{x}||_2^2 = \mathbf{x^Tx}$
+
+![Hình 1.2](1_2.png)
+
+Hình 1.2. Minh họa chuẩn $\ell_{1}$ và $\ell_{2}$ trong không gian hai chiều. Chuẩn $\ell_{2}$ là khoảng cách Euclid còn chuẩn $\ell_{1}$ là quãng đường ngắn nhất giữa hai điểm nếu chỉ được đi song song với các trục tọa độ.
+
+Với $p$ là số không nhỏ hơn 1 bất kỳ hàm số:
+
+$$\|\mathbf{x}\|_p=(|x_1|^p+|x_2|^p+\ldots|x_n|^p)^{\frac1p}$$
+
+được gọi là chuẩn $\ell_p$.
+
+Một vài giá trị $p$ thường hay dùng:
+
+- Khi $p=2$, ta có chuẩn như ở trên.
+- Khi $p=1$, ta có chuẩn $||\mathbf{x}||_1 = |x_1| + |x_2| + ... + |x_n|$ là tổng các trị tuyệt đối của từng thành phần của vector.
+- Khi $p \to \infty$, giả sử $i=\arg\max_{j=1,2,...,n}|x_j|$. Khi đó:
+
+$$\|\mathbf{x}\|_p=|x_i|\left(1+\left|\frac{x_1}{x_i}\right|^p+\cdots+\left|\frac{x_{i-1}}{x_i}\right|^p+\left|\frac{x_{i+1}}{x_i}\right|^p+\cdots+\left|\frac{x_n}{x_i}\right|^p\right)^{\frac1p}$$
+
+Ta thấy rằng
+
+$$\lim_{p\to\infty}\left(1+\left|\frac{x_1}{x_i}\right|^p+\cdots+\left|\frac{x_{i-1}}{x_i}\right|^p+\left|\frac{x_{i+1}}{x_i}\right|^p+\cdots+\left|\frac{x_n}{x_i}\right|^p\right)^{\frac1p}=1$$
+
+vì đại lượng trong dấu ngoặc đơn không quá $n$. Ta có:
+
+$$\|\mathbf{x}\|_\infty\triangleq\lim_{p\to\infty}\|\mathbf{x}\|_p=|x_i|=\max_{j=1,2,...,n}|x_j|$$
+
+### 1.14.2. Chuẩn Frobenius của ma trận
+
+Với một ma trận $\mathbf{A} \in \mathbb{R}^{m \times n}$, chuẩn thường được sử dụng nhất là chuẩn Frobenius, ký hiệu là $||\mathbf{A}||_F$, là căn bậc hai của tổng bình phương tất cả phần tử của nó:
+
+$$||\mathbf{A}||_F = \sqrt{\sum_{i=1}^m \sum_{j=1}^n a_{ij}^2}$$
+
+Chuẩn $\ell_2$ (khó) cũng có thể sử dụng cho ma trận nhưng không phổ biến bằng chuẩn Frobenius.
+
+## 1.15. Vết
+
+*Vết*(trace) của một ma trận vuông $\mathbf{A}$ được ký hiệu là $trace(\mathbf{A})$, là tổng các phần tử trên đường chéo chính của nó. Hàm vết xác định trên tập các ma trận vuông được sử dụng nhiều trong tối ưu vì nó có những tính chất đẹp.
+
+Các tính chất quan trọng của hàm vết, với giả sử rằng các ma trận trong hàm vết là vuông và các phép nhân ma trận thực hiện được:
+
+- Một ma trận vuông bất kỳ và chuyển vị của nó có vết bằng nhau: $trace(\mathbf{A}) = trace(\mathbf{A^T})$. Suy ra việc chuyển vị không làm thay đổi phần tử trên đường chéo chính.
+- Vết của một tổng bằng tổng vết: $trace(\sum_{i=1}^k \mathbf{A_i})=\sum_{i=1}^k trace(\mathbf{A_i})$
+- $trace(k\mathbf{A}) = k trace(\mathbf{A}), \forall k \in \mathbb{R}$
+- $trace(\mathbf{AB}) = trace(\mathbf{BA})$.
+- $trace(\mathbf{ABC}) = trace(\mathbf{BCA})$ nhưng không bằng $trace(\mathbf{ACB})$.
+- Nếu $\mathbf{X}$ khả nghịch thì cùng chiều với $\mathbf{A}$ thì 
+
+$$\mathrm{trace}(\mathbf{XAX}^{-1})=\mathrm{trace}(\mathbf{X}^{-1}\mathbf{XA})=\mathrm{trace}(\mathbf{A})$$
+
+- $||\mathbf{A}||_F^2 = trace(\mathbf{A^TA}) = trace(\mathbf{AA^T})$ với $\mathbf{A}$ là ma trận bất kỳ. Từ đây cũng suy ra $trace(\mathbf{AA^T}) \geq 0$ với mọi ma trận $\mathbf{A}$.
