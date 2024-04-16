@@ -12,7 +12,16 @@
     - [2.4.2. $f(\\mathbf{x}) = \\mathbf{Ax}$](#242-fmathbfx--mathbfax)
     - [2.4.3. $f(\\mathbf{x}) = \\mathbf{x^TAx}$](#243-fmathbfx--mathbfxtax)
     - [2.4.4. $f(\\mathbf{x}) = |\\mathbf{Ax - b}|\_2^2$](#244-fmathbfx--mathbfax---b_22)
-    - [2.4.5. $f(\\mathbf{X}) = trace(\\mathbf{AX})$](#245-fmathbfx--tracemathbfax)
+    - [2.4.5. $f(\\mathbf{x}) = \\mathbf{a^Txx^Tb}$](#245-fmathbfx--mathbfatxxtb)
+    - [2.4.6. $f(\\mathbf{X}) = trace(\\mathbf{AX})$](#246-fmathbfx--tracemathbfax)
+    - [2.4.7. $f(\\mathbf{X}) = \\mathbf{a^TXb}$](#247-fmathbfx--mathbfatxb)
+    - [2.4.8. $f(\\mathbf{X}) = |\\mathbf{X}|\_F^2$](#248-fmathbfx--mathbfx_f2)
+    - [2.4.9. $f(\\mathbf{X}) = trace(\\mathbf{X^TAX})$](#249-fmathbfx--tracemathbfxtax)
+    - [2.4.10. $f(\\mathbf{X}) = |\\mathbf{AX - B}|\_F^2$](#2410-fmathbfx--mathbfax---b_f2)
+  - [2.5. Bảng các gradient thường gặp](#25-bảng-các-gradient-thường-gặp)
+  - [2.6. Kiểm tra gradient](#26-kiểm-tra-gradient)
+    - [2.6.1. Xấp xĩ đạo hàm của hàm một biến](#261-xấp-xĩ-đạo-hàm-của-hàm-một-biến)
+    - [2.6.2. Xấp xĩ gradient của hàm nhiều biến](#262-xấp-xĩ-gradient-của-hàm-nhiều-biến)
 
 
 Giả sử các gradient tồn tại trong chương!
@@ -158,7 +167,158 @@ $$\nabla \|\mathbf{Ax - b}\|_2^2 = \mathbf{2A^TAx - 2A^Tb} = 2\mathbf{A^T(Ax - b
 
 - Cách 2: Sử dụng $\nabla(\mathbf{Ax - b}) = \mathbf{A^T}$ và $\nabla\mathbf{\|x\|_2^2} = 2\mathbf{x}$ và quy tắc chuỗi ta thu được kết quả tương tự.
 
-### 2.4.5. $f(\mathbf{X}) = trace(\mathbf{AX})$
+### 2.4.5. $f(\mathbf{x}) = \mathbf{a^Txx^Tb}$
+
+Viết lại $f(\mathbf{x}) = \mathbf{(a^Tx)(x^Tb)}$ và dùng quy tắc tích, ta có:
+
+$$\nabla(\mathbf{a^TxxTb}) = \mathbf{ax^Tb + b^Ta^Tx} = \mathbf{ab^Tx + ba^Tx = (ab^T + ba^T)x}$$
+
+### 2.4.6. $f(\mathbf{X}) = trace(\mathbf{AX})$
+
+Giả sử $\mathbf{A} \in \mathbb{R}^{n \times m},\ \mathbf{X} \in \mathbb{R}^{m \times n}$ và $\mathbf{B} = AX \in \mathbb{R}^{n \times n}$. Theo định nghĩa của trace:
+
+$$f(\mathbf{X}) = trace (\mathbf{AX}) = trace(\mathbf{B}) = \sum_{i=1}^{n} b_ii = \sum_{j=1}^n \sum{i=1}^n a_{ji} x{ji}$$
+
+Từ đó suy ra $\displaystyle\frac{\partial f(\mathbf{X})}{\partial x_{ij}} = a_{ji}$. Vậy theo định nghĩa gradient của ma trận ta có $trace(\mathbf{AX}) = \mathbf{A^T}$
+
+### 2.4.7. $f(\mathbf{X}) = \mathbf{a^TXb}$
+
+Giả sử rằng $\mathbf{a} \in \mathbb{R}^m,\ \mathbf{X} \in \mathbb{R}^{m \times n}$ và $\mathbf{b} \in \mathbb{R}^n$. Ta có thể chứng minh được:
+
+$$f(\mathbf{X}) = \sum_{i=1}^m \sum_{j=1}^n x_{ij}a_ib_j$$
+
+Từ đó sử dụng định nghĩa của phép gradient ma trận ta có
+
+$$\nabla_{\mathbf{X}}\left(\mathbf{a}^T \mathbf{X} \mathbf{b}^T\right)=\left[\begin{array}{cccc}a_1 b_1 & a_1 b_2 & \ldots & a_1 b_n \\ a_2 b_1 & a_2 b_2 & \ldots & a_2 b_n \\ \ldots & \ldots & \ddots & \ldots \\ \ldots & \ldots & \ldots \\ a_m b_1 & a_m b_2 & \ldots & a_m b_n\end{array}\right]=\mathbf{a b}^T$$
+
+### 2.4.8. $f(\mathbf{X}) = \|\mathbf{X}\|_F^2$
+
+Giả sử $\mathbf{X} \in \mathbb{R}^{n\times n}$, ta có:
+
+$$\|\mathbf{X}\|_F^2 = \sum_{i=1}^m \sum_{j=1}^n x_{ij}^2 \implies \frac{\partial f}{\partial x_{ij}} = 2x_{ij} \implies \nabla \|\mathbf{X}\|_F^2 = 2\mathbf{X}$$
+
+### 2.4.9. $f(\mathbf{X}) = trace(\mathbf{X^TAX})$
+
+Giả sử rằng $\mathbf{X=[x_1,x_2,...,x_n]} \in \mathbb{R^{m \times n}}$. Bằng cách khai triển:
+
+$$\mathbf{X}^T\mathbf{A}\mathbf{X}=\begin{bmatrix}\mathbf{x}_1^T\\\mathbf{x}_2^T\\\vdots\\\mathbf{x}_n^T\end{bmatrix}\mathbf{A}\begin{bmatrix}\mathbf{x}_1 \mathbf{x}_2 \ldots \mathbf{x}_n\end{bmatrix}=\begin{bmatrix}\mathbf{x}_1^T\mathbf{A}\mathbf{x}_1 \mathbf{x}_1^T\mathbf{A}\mathbf{x}_2 \ldots \mathbf{x}_1^T\mathbf{A}\mathbf{x}_n\\\mathbf{x}_2^T\mathbf{A}\mathbf{x}_1 \mathbf{x}_2^T\mathbf{A}\mathbf{x}_2 \ldots \mathbf{x}_2^T\mathbf{A}\mathbf{x}_n\\\cdots \cdots \ddots \cdots\\\mathbf{x}_n^T\mathbf{A}\mathbf{x}_1 \mathbf{x}_n^T\mathbf{A}\mathbf{x}_2 \ldots \mathbf{x}_n^T\mathbf{A}\mathbf{x}_n\end{bmatrix}$$
+
+Ta tính được $trace(\mathbf{X^TAX}) = \sum_{i=1}^n \mathbf{x_i^TAx_i}$. Sau đó ta sử dụng công thức
+
+$$\nabla_\mathbf{X}\mathrm{trace}(\mathbf{X}^T\mathbf{A}\mathbf{X})=(\mathbf{A}+\mathbf{A}^T)\begin{bmatrix}\mathbf{x}_1 \mathbf{x}_2 \ldots \mathbf{x}_n\end{bmatrix}=(\mathbf{A}+\mathbf{A}^T)\mathbf{X}.$$
+
+### 2.4.10. $f(\mathbf{X}) = \|\mathbf{AX - B}\|_F^2$
+
+Tương tự 2.4.4 ta thu được
+
+$$\nabla_\mathbf{X} \|\mathbf{AX - B}\|_F^2 = 2\mathbf{A^T(AX - B)}$$
+
+## 2.5. Bảng các gradient thường gặp
+
+| $f(\mathbf{x})$ | $\nabla f(\mathbf{x})$ | $f(\mathbf{X})$ | $\nabla_\mathbf{X} f(\mathbf{X})$ |
+|---|---|---|---|
+| $\mathbf{x}$ | b | c | d |
+| $\mathbf{a^Tx}$ | b | c | d |
+| $\mathbf{x^TAx}$ | b | c | d |
+| $\mathbf{x^Tx =\|\|x\|\|_2^2}$ | b | c | d |
+| $\mathbf{\|\|Ax-b\|_2^2}\|\|$ | b | c | d |
+| $\mathbf{a}^T(\mathbf{x}^T\mathbf{x})\mathbf{b}$ | b | c | d |
+| $\mathrm{a}^T\mathrm{x}\mathrm{x}^T\mathrm{b}$ | b | c | d |
+
+
+## 2.6. Kiểm tra gradient
+
+Việc tính gradient của hàm nhiều biến có thể phức tạp và dễ mắc lỗi. Có cách để kiểm tra liệu gradient tính được có chính xác không. Cách này dựa trên định nghĩa của đạo hàm hàm một biến.
+
+### 2.6.1. Xấp xĩ đạo hàm của hàm một biến
+
+Xét cách tính đạo hàm của hàm một biến theo định nghĩa:
+
+$$f^{\prime}(x)=\lim _{\varepsilon \rightarrow 0} \frac{f(x+\varepsilon)-f(x)}{\varepsilon}$$
+
+Trên mày tính, ta có thể chọn $\varepsilon$ rất nhỏ, rồi xấp xĩ đạo hàm này bởi
+
+$$f'(x)\approx\lim_{\varepsilon\to0}\frac{f(x+\varepsilon)-f(x)}\varepsilon.$$
+
+Trên thực tế, công thức xấp xĩ đạo hàm hai phía thường được sử dụng:
+
+$$f'(x)\approx\frac{f(x+\varepsilon)-f(x-\varepsilon)}{2\varepsilon}.$$(2.20)
+
+Cách tính này gọi là *numerical gradient*. Có hai cách giải thích vì sao cách tính như 2.20 rộng rãi:
+
+- Cách 1: Bằng giải tích:
+
+Sử dụng khai triển Taylor với $\varepsilon$ rẩt nhỏ, ta có hai xấp xĩ sau:
+
+$$f(x+\varepsilon)\approx f(x)+f^{\prime}(x)\varepsilon+\frac{f"(x)}2\varepsilon^2+\frac{f^{(3)}}6\varepsilon^3+\ldots $$(2.21)
+
+$$\frac{f(x+\varepsilon)-f(x-\varepsilon)}{2\varepsilon}\approx f'(x)+\frac{f'^{(3)}(x)}6\varepsilon^2+\cdots=f'(x)+O(\varepsilon^2).$$(2.22)
+
+Trong đó $O()$ là Big O notation.
+
+Từ đó, nếu xấp xỉ đạo hàm bằng công thức (2.23), sai số sẽ là $O(\varepsilon)$. Trong khi đó, nếu xấp xĩ đạo hàm bằng coogn thức (2.24), sai số là $O(\varepsilon^2)$. Khi $\varepsilon$ rất nhỏ thì: $O(\varepsilon^2)\ll O(\varepsilon),$ tức cách sử dụng (2.24) hiệu quả hơn, sai số nhỏ hơn.
+
+### 2.6.2. Xấp xĩ gradient của hàm nhiều biến
+
+Với hàm nhiều biến công thức (2.24) được áp dụng cho từng biến khi các biến khác cố định. Cụ thể, ta sử dụng định nghĩa gradient của một hàm số nhận đầu vào là một ma trận. Mỗi thành phần của ma trận kết quả là đạo hàm riêng của hàm số theo thành phần đó.
+
+Cách tính gradient xấp xĩ hai phía thường cho giá trị khá chính xác. Tuy nhiên, cách này không được sử dụng để tính gradient vì độ phức tạp quá cao so với tính trực tiếp. Tại mỗi thành phần, ta cần tính giá trị của hàm số tại phía trái và phía phải. Việc làm này không khả thi với ma trận lớn. Khi so sánh đạo hàm xấp xĩ với gradient tính theo công thức, người ta thường giảm số chiều dữ liệu và giảm số điểm dữ liệu để thuận tiện cho việc tính toán. Nếu gradient tính được là chính xác, nó sẽ rất gần với giá trị xấp xĩ này.
+
+Đoạn code dưới đây giúp kiểm tra gradient của một hàm số khả vi $f:\mathbb{R}^{m \times n} \to \mathbb{R}$, có kèm theo ví dụ. Để sử dụng hàm `check_grad`, ta cần hai hàm: `fn(X)` để tính giá trị hàm số tại $\mathbf{X}$. Hàm thứ hai là `gr(X)` để tính gradient của `fn(X)`.
+
+```python
+import numpy as np
+
+np.random.seed(42)
+
+def check_grad(fn, gr, X):
+    X_flat = X.reshape(-1) # chuyển ma trận X về mảng 1 chiều
+    shape_X = X.shape # lưu lại shape của X
+    num_grad = np.zeros_like(X) # tạo ma trận numerical grad có shape giống X
+    grad_flat = np.zeros_like(X_flat) # tạo mảng 1 chiều grad_flat có shape giống X_flat
+    eps = 1e-6 # giá trị epsilon
+    numElems = X_flat.shape[0] # số phần tử của X_flat
+    # tính toán numerical gradient
+    for i in range(numElems): # duyệt qua tất cả phần tử của X
+        Xp_flat = X_flat.copy() 
+        Xn_flat = X_flat.copy()
+        Xp_flat[i] += eps
+        Xn_flat[i] -= eps
+        Xp = Xp_flat.reshape(shape_X)
+        Xn = Xn_flat.reshape(shape_X)
+        grad_flat[i] = (fn(Xp) - fn(Xn)) / (2 * eps)
+    num_grad = grad_flat.reshape(shape_X)
+    diff = np.linalg.norm(num_grad-gr(X)) # tính toán độ lệch giữa numerical gradient và gradient thực
+    print('Difference between two methods should be small:', diff)
+
+# Hàm số cần tính gradient: grad(trace(A*X)) == A^T
+
+m, n = 10, 20
+A = np.random.randn(m, n)
+X = np.random.randn(n, m)
+
+def fn1(X):
+    return np.trace(A.dot(X))
+
+def gr1(X):
+    return A.T
+
+check_grad(fn1, gr1, X)
+
+# Hàm số cần tính gradient: grad(x^T*A*x) == (A + A^T)*x
+
+A = np.random.randn(m, m)
+x = np.random.rand(m, 1)
+
+def fn2(x):
+    return x.T.dot(A).dot(x)
+
+def gr2(x):
+    return (A + A.T).dot(x)
+
+check_grad(fn2, gr2, x)
+
+```
 
 
 
