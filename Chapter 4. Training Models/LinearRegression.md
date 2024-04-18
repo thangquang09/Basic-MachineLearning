@@ -51,7 +51,7 @@ To simplify notations, we will just write $MSE(\mathbf{\theta})$ instead of $MSE
 ## The Normal Equation
 
 $$
-\hat{\mathbf{\theta}} = \mathbf{(X^TX)^{-1}X^T y} \tag{4-4}
+\hat{\mathbf{\theta}} = \mathbf{(X^T X)^{-1}X^T y} \tag{4-4}
 $$
 
 In this equation:
@@ -62,7 +62,7 @@ In this equation:
 Additionally, $\mathbf{\theta}$ can be computed by below function:
 
 $$
-\hat{\mathbf{\theta}} = \mathbf{X^+y}
+\hat{\mathbf{\theta}} = \mathbf{X^+ y}
 $$
 
 In this equation:
