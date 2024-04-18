@@ -8,7 +8,7 @@
 A simple regression model of life satisfaction:
 
 $$
-\text{life\_satisfaction} = \theta_0 + \theta_1 \times \text{GDP\_per_capita}
+\text{life satisfaction} = \theta_0 + \theta_1 \times \text{GDP per capita}
 $$
 
 This model is just a linear function of the input: `GPD_per_capita`, $\theta_0,\ \theta_1$ are model's parameters.
