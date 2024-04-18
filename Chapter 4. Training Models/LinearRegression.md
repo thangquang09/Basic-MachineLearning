@@ -16,8 +16,8 @@ This model is just a linear function of the input: `GPD_per_capita`, $\theta_0,\
 A linear model make a prediction by simply computing a weighted sum of the input features, plus a contact called the *bias team*. (also called the *intercept term*) as shown in Equation 4.1
 
 $$
-\hat{y} = \theta_0 + \theta_1 x_1 + \theta_2 x_2 + \dots + \theta_n x_n
-$$(4-1)
+\hat{y} = \theta_0 + \theta_1 x_1 + \theta_2 x_2 + \dots + \theta_n x_n \tag{4-1}
+$$
 
 In this equation:
 
@@ -29,8 +29,8 @@ In this equation:
 Vectorized equation: Equation 4-2
 
 $$
-\hat{y} = h_\mathbf{\theta}(\mathbf{x}) = \mathbf{\theta x}
-$$(4-2)
+\hat{y} = h_\mathbf{\theta}(\mathbf{x}) = \mathbf{\theta x} \tag{4-2}
+$$
 
 In this equation:
 
@@ -43,7 +43,7 @@ Notice that vector in ML is column vector, then the prediction is $\hat{y} = \ma
 The MSE of a linear regression hypothesis $h_\mathbf{\theta}$ on a training set $\mathbf{X}$ is calculated using Equation 4-3
 
 $$
-MSE(\mathbf{X}, h_\mathbf{\theta}) = \frac{1}{m} \sum_{i=1}^m (\mathbf{\theta^Tx_i} - y_i)^2
+MSE(\mathbf{X}, h_\mathbf{\theta}) = \frac{1}{m} \sum_{i=1}^m (\mathbf{\theta^Tx_i} - y_i)^2 \tag{4-3}
 $$
 
 To simplify notations, we will just write $MSE(\mathbf{\theta})$ instead of $MSE(\mathbf{X}, h_\mathbf{\theta})$.
@@ -51,8 +51,8 @@ To simplify notations, we will just write $MSE(\mathbf{\theta})$ instead of $MSE
 ## The Normal Equation
 
 $$
-\hat{\mathbf{\theta}} = \mathbf{(X^TX)^{-1}X^T y}
-$$(4-4)
+\hat{\mathbf{\theta}} = \mathbf{(X^TX)^{-1}X^T y} \tag{4-4}
+$$
 
 In this equation:
 
@@ -62,8 +62,11 @@ In this equation:
 Additionally, $\mathbf{\theta}$ can be computed by below function:
 
 $$
-\hat{\mathbf{\theta}} = \mathbf{}
+\hat{\mathbf{\theta}} = \mathbf{X^+y}
 $$
+
+In this equation:
+- $\mathbf{X^+}$ is *pseudoinverse* of $\mathbf{X}$.
 
 The pseudoinverse itself is computed using a standard matrix factorization technique called singular value decomposition (SVD) that can decompose the training set matrix $\mathbf{X}$ into the matrix multiplication of three matrices `!!!! (missing)`
  
