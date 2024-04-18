@@ -43,7 +43,7 @@ Notice that vector in ML is column vector, then the prediction is $\hat{y} = \ma
 The MSE of a linear regression hypothesis $h_\mathbf{\theta}$ on a training set $\mathbf{X}$ is calculated using Equation 4-3
 
 $$
-MSE(\mathbf{X}, h_\mathbf{\theta}) = \frac{1}{m} \sum_{i=1}^m (\mathbf{\theta^Tx_i} - y_i)^2 \tag{4-3}
+MSE(\mathbf{X}, h_\mathbf{\theta}) = \frac{1}{m} \sum_{i=1}^m (\mathbf{\theta^T x_i} - y_i)^2 \tag{4-3}
 $$
 
 To simplify notations, we will just write $MSE(\mathbf{\theta})$ instead of $MSE(\mathbf{X}, h_\mathbf{\theta})$.
