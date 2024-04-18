@@ -74,7 +74,7 @@ This approach is more efficient computing the Normal equation, plus it handles e
 
 ## Computational Complexity
 
-The Normal elation computes the inverse of $\mathbf{X^TX}$ which is an $(n+1) \times (n+1)$ (where $n$ is ^{2.4}$ to $O(n^3)$, depending on the implementation. In other words, if you double the number of features, you multiply the computational time by roughly $2^{2.4} = 5.3$ to $2^3 = 8$
+The Normal elation computes the inverse of $\mathbf{X^TX}$ which is an $(n+1) \times (n+1)$ (where $n$ is the number of intances). The computational complexity of inverting such a matrix is typically about $O(n^{2.4})$ to $O(n^3)$, depending on the implementation. In other words, if you double the number of features, you multiply the computational time by roughly $2^{2.4} = 5.3$ to $2^3 = 8$
 
 The SVD approach used by Scikit-Learn LinearRegression class is about $O(n^2)$. If you double the number of features, you multiply the computation time by roughly 4.
 
