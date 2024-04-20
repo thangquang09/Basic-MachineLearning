@@ -2,19 +2,19 @@
 
 *Gradient descent* is a generic optimatimazion algorithm of finding optimal solution to a wide range of problems. The general idea is to tweak parameters iteratively in order to optimize the cost function.
 
-![alt text](image.png)
+![alt text](images/image.png)
 
 An important parameter in gradient descent is the size of the steps, determined by *learning rate* hyperparameter. If the *learning rate* is too small, then the algorithm will have to go through many iterations to converge.
 
-![alt text](image-1.png)
+![alt text](images/image-1.png)
 
 In other case, if the learning rate is too hight, you might jumps across the valley and end up on the other side. This might make the algorithm diverge.
 
-![alt text](image-2.png)
+![alt text](images/image-2.png)
 
 Additionally, not all cost function look like nice, regular bowls. There may be holes, ridges, plateaus, and all sorts of irregular terrain. Making convergence to the minium difficult. Look at below picture which shows the two main challenges with gradient descent. If the random initialization starts the algorithm on the left, then it will converge to a local minimum, which is not a global minimum. If it start on the right, then it will take very long time to cross the plateau. And if you stop too early, you will never reach the global minimum.
 
-![alt text](image-3.png)
+![alt text](images/image-3.png)
 
 Fortunately, the MSE cost function for a linear regression model happens to be a *convex function*, which means that if you pick any two point on a curve, the line segment joining them is nerve below the curve. This implies that there are no local minima, just one global minimum.
 
@@ -22,7 +22,7 @@ When use Gradient Descent we should make features in the same scale. The picture
 - On the left, features are in the same scale, the algorithm straight toward the minimum.
 - On the right, features are not in the same scale, it still reach the minimum but it will take a long time.
 
-![alt text](image-4.png)
+![alt text](images/image-4.png)
 
 Training model means searching for a combination of model parameters that minimizes the cost function.
 
@@ -86,7 +86,7 @@ The main problems of Batch Gradient Descent is it uses the whole tanning set to 
 
 On the other hand, due to its stochastic (random) nature, this algorithm is much less regular than batch gradient descent. instead of gently decreasing until it reaches the minimum, the cost function will bounce up and down, decreasing only on average. Over time it will end up very close to the minimum, but once it gets there it will continue to bounce around, never settling down (Figure below). Once the algorithm end, the final parameter will be good but not optimal.
 
-![alt text](image-5.png)
+![alt text](images/image-5.png)
 
 Therefore, randomness is good to escape from local optima, but bad because it means that the algorithm can be never reaches to the minimum. One solution is gradually reduce the learning rate. The steps start out large (will help escape from local optima), then get smaller to settle to good minimum. But if you reduce to quickly, algorithm may get stuck in a local minimum. If the learning rate reduced too slowly, it may jump around the minimum for a long time and end up suboptimal solution if you half training too early.
 
@@ -96,3 +96,14 @@ Note that since instances are picked randomly, some instances may be picked seve
 >
 >When using the stochastic gradient descent, the training instances must be independent and identically distributed (IID) to ensure that the parameters get pulled toward the global minimum, on average. A simple way to ensure this is to shuffle the instances during training (pick each instance randomly, or shuffle training set at the beginning of each epoch).
 
+## Mini-Batch Gradient Descent
+
+The last gradient descent algorithm. Instead of computing the gradients based on the full training set (as in Batch Gradient Descent) or based on just on instance (as in Stochastic Gradient Descent), mini-batch GD computes the gradients on small random set of instances called *mini-batch*. The main advantage of mini-batch GD over stochastic GD is that you can performance boost from hardware optimization of matrix operations, especially when using GPUs.
+
+The algorithm is process parameters is less erratic than stochastic GD. As a result, mini-batch GD will end up walking around a bit closer to the minimum than stochastic GD but it may be harder for it to escape from local minima. Figure below shows the paths taken by the three GD algorithms in parameter space during training.
+
+The bath GD actually stop at the minimum, while both stochastic GD and mini-batch GD continue walk around. However, batch GD takes a lot of time to take each step, and stochastic GD and mini-batch GD would also reach the minimum if we used a good learning schedule.
+
+![Figure 4-11](images/gradient_descent_paths_plot.png)
+
+![alt text](images/table41.png)
