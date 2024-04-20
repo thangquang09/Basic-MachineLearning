@@ -31,13 +31,13 @@ Training model means searching for a combination of model parameters that minimi
 Equation 4-5: Partial derivatives of the cost function
 
 $$
-\frac\partial{\partial\theta_j}\mathrm{MSE}(\mathbf{\theta})=\frac2m\sum_{i\operatorname{=}1}^m\left(\mathbf{\theta}^\mathsf{T}\mathbf{x}^{(i)}-y^{(i)}\right)x_j^{(i)} \tag{4-5}
+\frac\partial{\partial\theta_j}\mathrm{MSE}(\mathbf{\theta})=\frac2m\sum_{i=1}^m\left(\mathbf{\theta}^\mathsf{T}\mathbf{x}^{(i)}-y^{(i)}\right)x_j^{(i)} \tag{4-5}
 $$
 
 Instead of computing these partial derivatives individually, can use Equation 4-6 to compute them all in one go. The gradient vector, noted $\nabla_\mathbf{\theta} MSE(\mathbf{\theta})$ contains all the partial derivatives of the cost function:
 
 $$
-\nabla_{\mathbf{\theta}}\operatorname{MSE}(\mathbf{\theta})=\begin{pmatrix}\dfrac{\partial}{\partial\theta_0}\operatorname{MSE}(\mathbf{\theta})\\\\\dfrac{\partial}{\partial\theta_1}\operatorname{MSE}(\mathbf{\theta})\\\vdots\\\dfrac{\partial}{\partial\theta_n}\operatorname{MSE}(\mathbf{\theta})\end{pmatrix}=\dfrac{2}{m}\mathbf{X}^{\top}(\mathbf{X}\mathbf{\theta}-\mathbf{y})
+\nabla_{\mathbf{\theta}}{MSE}(\mathbf{\theta})=\begin{pmatrix}\dfrac{\partial}{\partial\theta_0}{MSE}(\mathbf{\theta})\\\\\dfrac{\partial}{\partial\theta_1}{MSE}(\mathbf{\theta})\\\vdots\\\dfrac{\partial}{\partial\theta_n}{MSE}(\mathbf{\theta})\end{pmatrix}=\dfrac{2}{m}\mathbf{X}^{\top}(\mathbf{X}\mathbf{\theta}-\mathbf{y})
 $$
 
 >[!note] Faster
