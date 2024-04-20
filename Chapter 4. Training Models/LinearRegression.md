@@ -43,7 +43,7 @@ Notice that vector in ML is column vector, then the prediction is $\hat{y} = \ma
 The MSE of a linear regression hypothesis $h_\mathbf{\theta}$ on a training set $\mathbf{X}$ is calculated using Equation 4-3
 
 $$
-MSE(\mathbf{X}, h_\mathbf{\theta}) = \frac{1}{m} \sum_{i=1}^m (\mathbf{\theta^T x_i} - y_i)^2 \tag{4-3}
+MSE(\mathbf{X}, h_\mathbf{\theta}) = \frac{1}{m} \sum_{i=1}^m (\mathbf{\theta^Tx_i} - y_i)^2 \tag{4-3}
 $$
 
 To simplify notations, we will just write $MSE(\mathbf{\theta})$ instead of $MSE(\mathbf{X}, h_\mathbf{\theta})$.
@@ -68,13 +68,13 @@ $$
 In this equation:
 - $\mathbf{X^+}$ is *pseudoinverse* of $\mathbf{X}$.
 
-The pseudoinverse itself is computed using a standard matrix factorization technique called singular value decomposition (SVD) that can decompose the training set matrix $\mathbf{X}$ into the matrix multiplication of three matrices `!!!! (missing)`
- 
+The pseudoinverse itself is computed using a standard matrix factorization technique called singular value decomposition (SVD) that can decompose the training set matrix $\mathbf{X}$ into the matrix multiplication of three matrices $\mathbf{U}\boldsymbol{\Sigma}\mathbf{V}^{\intercal}$. The pseudoinverse is computed as $\mathbf{X}^+ = \mathbf{V} \boldsymbol{\Sigma} \mathbf{V}^{\intercal}$. Reference `pseudoinverse matrix`. 
+  
 This approach is more efficient computing the Normal equation, plus it handles edge cases nicely. The Normal elation may not work if the matrix $\mathbf{X^T X}$ is not invertible, such as $m < n$ or if some feature are redundant, but the pseudoinverse is always defined.
 
 ## Computational Complexity
 
-The Normal elation computes the inverse of $\mathbf{X^T X}$ which is an $(n+1) \times (n+1)$ (where $n$ is the number of intances). The computational complexity of inverting such a matrix is typically about $O(n^{2.4})$ to $O(n^3)$, depending on the implementation. In other words, if you double the number of features, you multiply the computational time by roughly $2^{2.4} = 5.3$ to $2^3 = 8$
+The Normal elation computes the inverse of $\mathbf{X^T X}$ which is an $(n+1) \times (n+1)$ (where $n$ is the number of intances). The computational complexity of inverting such a matrix is typically abougit put $O(n^{2.4})$ to $O(n^3)$, depending on the implementation. In other words, if you double the number of features, you multiply the computational time by roughly $2^{2.4} = 5.3$ to $2^3 = 8$
 
 The SVD approach used by Scikit-Learn LinearRegression class is about $O(n^2)$. If you double the number of features, you multiply the computation time by roughly 4.
 
