@@ -1,3 +1,9 @@
+- [Gradient Descent](#gradient-descent)
+- [Batch Gradient Descent](#batch-gradient-descent)
+- [Stochastic Gradient Descent](#stochastic-gradient-descent)
+- [Mini-Batch Gradient Descent](#mini-batch-gradient-descent)
+
+
 ## Gradient Descent
 
 *Gradient descent* is a generic optimatimazion algorithm of finding optimal solution to a wide range of problems. The general idea is to tweak parameters iteratively in order to optimize the cost function.
