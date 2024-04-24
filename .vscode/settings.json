@@ -1,12 +1,16 @@
 {
     "cSpell.words": [
+        "hyperparameters",
         "linalg",
         "optimatimazion",
         "overfit",
         "overfitting",
         "pseudoinverse",
+        "randn",
+        "RMSE",
         "underfit",
         "underfiting",
-        "underfitting"
+        "underfitting",
+        "unregularized"
     ]
 }
