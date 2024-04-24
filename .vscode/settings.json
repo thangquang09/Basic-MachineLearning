@@ -2,6 +2,11 @@
     "cSpell.words": [
         "linalg",
         "optimatimazion",
-        "pseudoinverse"
+        "overfit",
+        "overfitting",
+        "pseudoinverse",
+        "underfit",
+        "underfiting",
+        "underfitting"
     ]
 }
