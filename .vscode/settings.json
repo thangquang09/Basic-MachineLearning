@@ -8,6 +8,7 @@
         "pseudoinverse",
         "randn",
         "RMSE",
+        "softmax",
         "underfit",
         "underfiting",
         "underfitting",
