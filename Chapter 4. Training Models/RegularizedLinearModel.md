@@ -27,7 +27,7 @@ $$
 
 >[!Note] Note
 >
->- The bias term $theta_0$ is not regularized (the sum is from $i=1$ to $i=n$). If we define $\mathbf{w} = [\theta_1, \dotsb, \theta_n]$ then the regularization is equal to $\displaystyle{ \alpha\left(\|\mathbf{w}\|_2\right)^2 }$, where $\|\mathbf{w}\|_2$ represents the $\ell_2$.
+>- The bias term $\theta_0$ is not regularized (the sum is from $i=1$ to $i=n$). If we define $\mathbf{w} = [\theta_1, \dotsb, \theta_n]$ then the regularization is equal to $\displaystyle{ \alpha\left(\|\mathbf{w}\|_2\right)^2 }$, where $\|\mathbf{w}\|_2$ represents the $\ell_2$.
 >
 >- It is important to scale the data (`StandardScaler`) before performing ridge regression, as it is sensitive to the scale of the input features. This is true of most regularized models.
 
