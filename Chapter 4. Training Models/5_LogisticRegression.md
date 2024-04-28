@@ -1,3 +1,9 @@
+- [Logistic Regression](#logistic-regression)
+  - [Estimated Probabilities](#estimated-probabilities)
+  - [Training and cost function](#training-and-cost-function)
+  - [Softmax Regression](#softmax-regression)
+
+
 # Logistic Regression
 
 Logistic Regression also called *logit regression* is commonly used to estimate the probability that an instance belongs to a particular class. If the estimated probability is greater than a given threshold $\to$ predict 1, otherwise $\to$ predict 0.
