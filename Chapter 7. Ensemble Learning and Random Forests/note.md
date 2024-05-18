@@ -1,6 +1,13 @@
 - [Ensemble Learning and Random Forests](#ensemble-learning-and-random-forests)
   - [Introduce](#introduce)
   - [Voting Classifiers](#voting-classifiers)
+  - [Bagging and Pasting](#bagging-and-pasting)
+    - [Random Patches and Random Subspaces](#random-patches-and-random-subspaces)
+  - [Random Forest](#random-forest)
+  - [Random Forest](#random-forest-1)
+  - [Features Importance](#features-importance)
+  - [Boosting](#boosting)
+    - [AdaBoost](#adaboost)
 
 
 # Ensemble Learning and Random Forests
@@ -13,7 +20,7 @@ Example: Train a `group of decision tree classifiers`, each on a different rando
 
 ## Voting Classifiers
 
-When you have trained a few classifiers that each on achieving about 80% accuracy. A simple way to create an even better is aggregate the predictions of each classifiers: the class which gets the most votes is the ensemble prediction.
+When you have trained a few classifiers that each on achieving about 80% accuracy. A simple way to create an even better is aggregate the predictions of each classifiers: the class which gets the most votes is the ensemble prediction. This is called `hard voting`. 
 
 ![Few classifiers](images/few_classifiers.png)
 
@@ -28,6 +35,72 @@ Example: You have a slightly biased coin that has a `51% chance of coming up wit
 Now that, suppose you build an ensemble containing `1000 classifiers` that are `individually correct only 51% of the time`. If you predict the majority `voted class`, you can hope for `up to 75% accuracy`. But it `only happens` if all classifiers are `perfectly independent` (Unless, they are likely to make the same types of errors). Because of that, we will train them `using very different algorithms`.
 
 Soft voting is averaged over all the individual classifiers probability predictions (If all the classifiers have `predict_proba()` method). It often achieves higher performance than hard voting because it gives more weight to highly confident votes.
+
+## Bagging and Pasting
+
+Bagging is use the sam training algorithm for every predictor but train them on different random subsets of the training set.
+
+Pasting is train many predictor in the whole training set.
+
+Once all predictors are trained, the ensemble can make a prediction for a new instance by simply aggregating the predictions of all predictors.
+
+### Random Patches and Random Subspaces
+
+The Bagging Classifier class supports sampling the feature. Sampling is controlled by two hyperparameters: `max_features` and `bootstrap_features`. They work the same way as `max_samples` and `bootstrap` but features sampling instead of instances sampling. This technique is particularly useful when you are deal with high-dimensional inputs. 
+
+`Random patches method` is `sampling both` training instances and features.
+
+`Keeping` all training `instances` but `sampling features` is called the `random subspaces method`.
+
+## Random Forest
+
+## Random Forest
+
+Random forest is an ensemble of decision trees, generally trained via the bagging method (sometimes pasting), typically with `max_samples` set to the size of training set. `Instead of` building a `BaggingClassifier` and passing it a Decision Tree, you can `use RandomForestClassifier` for `convenience` and `optimization` for `Decision Tree`.
+
+The Random Forest has `all the hyperparameters of a DecisionTreeClassifier` (to control how trees are grown), plus `all the hyperparameters of a BaggingClassifier` to control the ensemble itself.
+
+The random forest algorithm introduces `extra randomness when growing tree`, `instead of searching for the very best feature` when splitting a node, it `searches for the best feature among random subset of features`. By default, it samples $\sqrt{n}$ features ($n$ is the total number of features).
+
+## Features Importance 
+
+The random forest make it easy to measure the relative importance of each feature. Scikit-learn measures a features's importance by looking at how much the tree nodes that use that feature reduce impurity on average, across all trees in the forest. Can use `feature_importances_` of random forest class.
+
+The image shows importance of features of the MNIST dataset, easy to see the center of picture is the most important place to predict a digit.
+
+## Boosting
+
+Boosting refers to any ensemble methods that can `combine several weak learners` into `strong learners`. The general idea of most boosting methods is to `train predictors sequentially`, each trying to `correct its predecessor`.
+
+Most popular boosting methods are `AdaBoost` (adaptive boosting) and `Gradient Boosting`.
+
+### AdaBoost
+
+The mainly idea to `correct predicts's predecessor` is to `pay bit more attention` to `training instances that the predecessor underfit`. 
+
+![Adapt Boost](images/adaboost.png)
+
+Each `instance weight` $w^{(i)}$ is `initially set` to $1/m$. A first predictor is trained, and its `weighted error rate` $r_i$ is computed on the training set. This sequential learning technique has some `similarities` with `gradient descent`, except that instead of `tweaking a single predictors parameters` to `minimize a cost function`, Ada boost `adds predictors to the ensemble`, making it `better`. 
+
+$$
+r_{j}=\sum_{{\begin{array}{c}i=1\\\widehat{y}_{j}^{(i)}\neq y^{(i)}\end{array}}}^{m}w^{(i)}\quad\mathrm{where~}\widehat{y}_{j}^{(i)}\text{ is the }j^{{\mathrm{th}}}\text{ predictor's prediction for the }i^{{\mathrm{th}}}\text{ instance} \tag{7-1}
+$$
+
+The `predictor's weight` $\alpha_j$ is `computed using Equation 7-2`, in this: $\eta$ is the `learning rate` hyperparameter (default = 1). `The more accurate` the predictor is, `the higher its weight` will be. If it just `guessing randomly`, then its weight will be `close to 0`. However, if it is `often wrong` $\to$ its weight `will be negative`.
+
+$$
+\alpha_j=\eta\log\frac{1-r_j}{r_j} \tag{7-2}
+$$
+
+Next, the AdaBoost updates the instance weights, using Equation 7-3 which boost the weights of the misclassified instances.
+
+$$
+\text{for } i=1,2,\cdots,m\\w^{(i)}\leftarrow\begin{cases}w^{(i)}&\text{if } \widehat{y_j}^{(i)}=y^{(i)}\\w^{(i)}\exp\left(\alpha_j\right)&\text{if } \widehat{y_j}^{(i)}\neq y^{(i)}\end{cases} \tag{7-3}
+$$
+
+Then `all instance weights` are `normalized` (divided by $\sum_{i=1}^m w^{(i)}$)
+
+Finally, `process will be repeat` and it `stops when` the desired number of predictors is reached (it `reaches n_estimators`), or when a `prefect predictor is found`.
 
 
 
