@@ -8,6 +8,7 @@
   - [Features Importance](#features-importance)
   - [Boosting](#boosting)
     - [AdaBoost](#adaboost)
+  - [Gradient Boosting](#gradient-boosting)
 
 
 # Ensemble Learning and Random Forests
@@ -102,6 +103,56 @@ Then `all instance weights` are `normalized` (divided by $\sum_{i=1}^m w^{(i)}$)
 
 Finally, `process will be repeat` and it `stops when` the desired number of predictors is reached (it `reaches n_estimators`), or when a `prefect predictor is found`.
 
+## Gradient Boosting
+
+Just like Adaboost, gradient boosting works by `sequentially adding predictors to an ensemble`, each one correcting its predecessor. `Instead of tweaking instance weight`, it tries to `fit the new predictor` to the `residual errors` made by previous predictor.
+
+Example: using the `decision tree as the base predictors`; this is called gradient tree boosting, or `gradient boosted regression trees` (`GBRT`)
+
+```python
+import numpy as np
+from sklearn.tree import DecisionTreeRegressor
+
+np.random.seed(42)
+X = np.random.rand(100, 1) - .5
+y = 3 * X[:, 0] ** 2 + 0.05 * np.random.randn(100) # y = 3x^2 + Gaussian noise
+
+tree_reg1 = DecisionTreeRegressor(max_depth=2, random_state=42)
+tree_reg1.fit(X, y)
+
+## Next, we train a second Decision tree on the residual error made by first predictor.
+y2 = y - tree_reg1.predict(X)
+tree_reg2 = DecisionTreeRegressor(max_depth=2, random_state=42)
+tree_reg2.fit(X, y2)
+
+# Then, we will train the third predictor on the residual error made by second predictor. 
+y3 = y2 - tree_reg2.predict(X)
+tree_reg3 = DecisionTreeRegressor(max_depth=2, random_state=42)
+tree_reg3.fit(X, y3)
+
+# let make prediction on a new instance
+X_new = np.array([[-0.4], [0], [0.5]])
+print(sum(tree.predict(X_new) for tree in (tree_reg1, tree_reg2, tree_reg3)))
+_____________________________________________
+array([0.49484029, 0.04021166, 0.75026781])
+```
+
+![residual and tree predictions](images/residual_treE_prediction.png)
+
+Figure above shows the predictions of these trees on the left column, and the ensemble's predictions in the right column.
+
+First row, there is only one tree, then on the both sides, it similar.
+
+Second row, a new tree is trained on the residual errors of the first tree. On the right, the ensemble's prediction are equal to the sum of the predictions of the first two trees.
+
+Can use Scikit-Learn GradientBoostingRegressor class to train GBRT ensembles more easily.
+
+```python
+from sklearn.ensemble import GradientBoostingRegressor
+
+gbrt = GradientBoostingRegressor(max_depth=2, n_estimators=3, learning_rate=1.0, random_state=42)
+gbrt.fit(X, y)
+```
 
 
 
