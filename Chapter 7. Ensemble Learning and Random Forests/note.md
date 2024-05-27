@@ -4,7 +4,6 @@
   - [Bagging and Pasting](#bagging-and-pasting)
     - [Random Patches and Random Subspaces](#random-patches-and-random-subspaces)
   - [Random Forest](#random-forest)
-  - [Random Forest](#random-forest-1)
   - [Features Importance](#features-importance)
   - [Boosting](#boosting)
     - [AdaBoost](#adaboost)
@@ -35,11 +34,11 @@ Example: You have a slightly biased coin that has a `51% chance of coming up wit
 
 Now that, suppose you build an ensemble containing `1000 classifiers` that are `individually correct only 51% of the time`. If you predict the majority `voted class`, you can hope for `up to 75% accuracy`. But it `only happens` if all classifiers are `perfectly independent` (Unless, they are likely to make the same types of errors). Because of that, we will train them `using very different algorithms`.
 
-Soft voting is averaged over all the individual classifiers probability predictions (If all the classifiers have `predict_proba()` method). It often achieves higher performance than hard voting because it gives more weight to highly confident votes.
+Soft voting is `averaged over all the individual classifiers probability predictions` (If all the classifiers have `predict_proba()` method). It often achieves higher performance than hard voting because it gives more weight to highly confident votes.
 
 ## Bagging and Pasting
 
-Bagging is use the sam training algorithm for every predictor but train them on different random subsets of the training set.
+Bagging is use the same training algorithm for every predictor but train them on different random subsets of the training set.
 
 Pasting is train many predictor in the whole training set.
 
@@ -53,7 +52,6 @@ The Bagging Classifier class supports sampling the feature. Sampling is controll
 
 `Keeping` all training `instances` but `sampling features` is called the `random subspaces method`.
 
-## Random Forest
 
 ## Random Forest
 
